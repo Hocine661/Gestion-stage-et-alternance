@@ -1,5 +1,13 @@
 package dao;
 
+import model.Commentaire;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 public class CommentaireDAO {
 
     public List<Commentaire> findByDeclaration(int idDeclaration) {
@@ -7,7 +15,7 @@ public class CommentaireDAO {
 
         String sql = "SELECT * FROM commentaire WHERE idDeclaration = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = dao.DatabaseConnection.getConnection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setInt(1, idDeclaration);

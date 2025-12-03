@@ -1,11 +1,17 @@
 package dao;
 
+import model.Declaration;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 public class DeclarationDAO {
 
     public Declaration findById(int idDeclaration) {
         String sql = "SELECT * FROM declaration WHERE idDeclaration = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = dao.DatabaseConnection.getConnection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setInt(1, idDeclaration);

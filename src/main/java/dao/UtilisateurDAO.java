@@ -10,7 +10,7 @@ public class UtilisateurDAO {
     public Utilisateur findByEmail(String email) {
         String sql = "SELECT * FROM utilisateur WHERE email = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = dao.DatabaseConnection.getConnection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setString(1, email);
@@ -22,7 +22,7 @@ public class UtilisateurDAO {
                 u.setNom(rs.getString("nom"));
                 u.setPrenom(rs.getString("prenom"));
                 u.setEmail(rs.getString("email"));
-                u.setMotDePasse(rs.getString("mot_de_passe"));
+                u.setMotdepasse(rs.getString("mot_de_passe"));
                 u.setRole(rs.getString("role"));
                 return u;
             }

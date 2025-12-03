@@ -1,11 +1,17 @@
 package dao;
 
+import model.Entreprise;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 public class EntrepriseDAO {
 
     public Entreprise findById(int idEntreprise) {
         String sql = "SELECT * FROM entreprise WHERE idEntreprise = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = dao.DatabaseConnection.getConnection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setInt(1, idEntreprise);

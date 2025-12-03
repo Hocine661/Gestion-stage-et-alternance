@@ -5,8 +5,8 @@ import java.time.LocalDate;
 
 public class Declaration {
     private int idDeclaration;
-    private Date DateDebut;
-    private Date DateFin;
+    private LocalDate dateDebut;
+    private LocalDate dateFin;
     private String type;
     private String mission;
     private String statut;
@@ -15,8 +15,8 @@ public class Declaration {
 
     public Declaration() {
         this.idDeclaration = idDeclaration;
-        DateDebut = dateDebut;
-        DateFin = dateFin;
+        dateDebut = dateDebut;
+        dateFin = dateFin;
         this.type = type;
         this.mission = mission;
         this.statut = statut;
@@ -32,20 +32,20 @@ public class Declaration {
         this.idDeclaration = idDeclaration;
     }
 
-    public Date getDateDebut() {
-        return DateDebut;
+    public LocalDate getDateDebut() {
+        return dateDebut;
     }
 
     public void setDateDebut(LocalDate dateDebut) {
-        DateDebut = dateDebut;
+        this.dateDebut = dateDebut;
     }
 
-    public Date getDateFin() {
-        return DateFin;
+    public LocalDate getDateFin() {
+        return dateFin;
     }
 
     public void setDateFin(LocalDate dateFin) {
-        DateFin = dateFin;
+        this.dateFin = dateFin;
     }
 
     public String getType() {

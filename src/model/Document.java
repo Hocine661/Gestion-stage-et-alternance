@@ -7,13 +7,13 @@ public class Document {
     private int IdDocument;
     private String type;
     private String cheminFichier;
-    private Date DateDepot;
+    private Date dateDepot;
 
     public Document() {
         IdDocument = IdDocument;
         this.type = type;
         this.cheminFichier = cheminFichier;
-        DateDepot = dateDepot;
+        dateDepot = dateDepot;
     }
 
     public int getIdDocument() {
@@ -41,11 +41,11 @@ public class Document {
     }
 
     public Date getDateDepot() {
-        return DateDepot;
+        return dateDepot;
     }
 
     public void setDateDepot(Date dateDepot) {
-        DateDepot = dateDepot;
+        dateDepot = dateDepot;
     }
 
     public void setDateDepot(LocalDate dateDepot) {

@@ -4,20 +4,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ece.application.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" styleClass="ba" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ece.application.LoginController">
    <children>
-      <Pane layoutX="186.0" layoutY="50.0" maxHeight="1.7976931348623157E308" prefHeight="313.0" prefWidth="261.0" style="-fx-border-style: solid; -fx-border-radius: 15;" AnchorPane.bottomAnchor="37.0" AnchorPane.topAnchor="50.0">
+      <Pane layoutX="125.0" layoutY="50.0" maxHeight="1.7976931348623157E308" prefHeight="313.0" prefWidth="335.0" style="-fx-border-style: solid; -fx-border-radius: 30; -fx-background-color: F6F6F6;" AnchorPane.bottomAnchor="37.0" AnchorPane.topAnchor="50.0">
          <children>
-            <Button layoutX="88.0" layoutY="240.0" mnemonicParsing="false" text="Connexion" textAlignment="CENTER">
+            <Button layoutX="124.0" layoutY="250.0" mnemonicParsing="false" style="-fx-background-color: rgba(43, 138, 246, 1); -fx-background-radius: 30;" text="Connexion" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>
             </Button>
-            <PasswordField fx:id="pwfield" layoutX="38.0" layoutY="170.0" prefHeight="36.0" prefWidth="191.0" />
-            <TextField fx:id="namefield" layoutX="38.0" layoutY="98.0" prefHeight="36.0" prefWidth="191.0" />
+            <PasswordField fx:id="pwfield" layoutX="38.0" layoutY="170.0" prefHeight="30.0" prefWidth="256.0" promptText="user" style="-fx-background-radius: 10; -fx-background-color: white;" />
+            <TextField fx:id="namefield" layoutX="38.0" layoutY="98.0" prefHeight="30.0" prefWidth="256.0" style="-fx-background-radius: 10; -fx-background-color: white;" />
             <Label layoutX="38.0" layoutY="69.0" text="Username" />
             <Label layoutX="38.0" layoutY="143.0" text="Password" />
-            <Label layoutX="84.0" layoutY="14.0" style="-fx-background-color: water;" text="Connexion" textFill="#3e6296">
+            <Label layoutX="111.0" layoutY="14.0" style="-fx-background-color: water;" text="Connexion" textFill="#3e6296">
                <font>
                   <Font name="System Bold Italic" size="20.0" />
                </font>

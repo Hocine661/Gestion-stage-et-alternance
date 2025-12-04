@@ -2,10 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -16,20 +13,13 @@
     <top>
         <HBox spacing="16"
               BorderPane.alignment="CENTER_LEFT"
-              style="-fx-background-color: linear-gradient(to bottom, #214cbd, #1c43a7);
-                     -fx-alignment: CENTER_LEFT;
-                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0.1, 0, 2);">
+              style="-fx-background-color: #214cbd;">
             <padding>
                 <Insets top="10" right="16" bottom="10" left="16"/>
             </padding>
 
             <children>
-                <ImageView fx:id="logoView" fitHeight="28" preserveRatio="true">
-                    <image>
-                        <Image url="/c64bbea1-9554-4b76-b1eb-8f22242fe7ea-Photoroom.png" />
-
-                    </image>
-                </ImageView>
+                <!-- Image supprimée -->
 
                 <Label text="Gestion Stages et Alternance"
                        style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: 600;"/>
@@ -64,21 +54,20 @@
 
                     <!-- Statut -->
                     <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0"
-                               style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;
-                                      -fx-effect: dropshadow(gaussian, rgba(17,24,39,0.08), 16, 0.1, 0, 3);">
+                               style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;">
                         <VBox spacing="8">
 
                             <Label text="Statut de ma déclaration"
                                    style="-fx-font-size: 15px; -fx-font-weight: 700;"/>
 
                             <Label fx:id="statusLabel" text="En attente"
-                                   style="-fx-padding: 6 10 6 10; -fx-background-radius: 999;
+                                   style="-fx-padding: 6 10; -fx-background-radius: 999;
                                           -fx-background-color: #fff7e6; -fx-text-fill: #8a5a00;
                                           -fx-font-weight: 700;"/>
 
                             <HBox spacing="8">
-                                <Button text="Déclarer un stage" onAction="#declareInternship"/>
-                                <Button text="Modifier" onAction="#editInternship"/>
+                                <Button fx:id="declareBtn" text="Déclarer un stage" onAction="#declareInternship"/>
+                                <Button fx:id="editDeclarationBtn" text="Modifier" onAction="#editInternship"/>
                             </HBox>
 
                         </VBox>
@@ -86,8 +75,7 @@
 
                     <!-- Documents -->
                     <StackPane GridPane.columnIndex="1" GridPane.rowIndex="0"
-                               style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;
-                                      -fx-effect: dropshadow(gaussian, rgba(17,24,39,0.08), 16, 0.1, 0, 3);">
+                               style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;">
                         <VBox spacing="8">
 
                             <Label text="Documents obligatoires"
@@ -105,9 +93,7 @@
 
                     <!-- Entreprise -->
                     <StackPane GridPane.columnIndex="0" GridPane.rowIndex="1"
-                               style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;
-                                      -fx-effect: dropshadow(gaussian, rgba(17,24,39,0.08), 16, 0.1, 0, 3);">
-
+                               style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;">
                         <VBox spacing="6">
 
                             <Label text="Mon entreprise d'accueil"
@@ -144,9 +130,7 @@
 
                     <!-- Commentaires -->
                     <StackPane GridPane.columnIndex="1" GridPane.rowIndex="1"
-                               style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;
-                                      -fx-effect: dropshadow(gaussian, rgba(17,24,39,0.08), 16, 0.1, 0, 3);">
-
+                               style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;">
                         <VBox spacing="8">
                             <Label text="Commentaires / Suivi"
                                    style="-fx-font-size: 15px; -fx-font-weight: 700;"/>

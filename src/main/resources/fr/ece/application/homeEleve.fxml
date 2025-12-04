@@ -6,6 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 
+
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="fr.ece.application.HomeEleveController"
@@ -25,7 +26,8 @@
             <children>
                 <ImageView fx:id="logoView" fitHeight="28" preserveRatio="true">
                     <image>
-                        <Image url="@logo.png"/>
+                        <Image url="/c64bbea1-9554-4b76-b1eb-8f22242fe7ea-Photoroom.png" />
+
                     </image>
                 </ImageView>
 

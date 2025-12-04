@@ -30,6 +30,7 @@ public class HomeControllerUser {
             String dateFin = String.valueOf(dateFinField.getValue());
             String type = typeField.getValue();
 
+            System.out.println("Email : " + entreprise);
             System.out.println("Entreprise : " + entreprise);
             System.out.println("Date début : " + dateDebut);
             System.out.println("Date fin : " + dateFin);

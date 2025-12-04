@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ece.application.HomeControllerUser">
+
+    <children>
+
+        <!-- Conteneur principal centré -->
+        <VBox alignment="CENTER" layoutX="157.0" layoutY="84.0" spacing="15">
+
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Déclaration de Stage / Alternance" />
+
+            <!-- Champ entreprise -->
+            <TextField fx:id="entrepriseField" prefWidth="250" promptText="Nom de l'entreprise" />
+
+            <!-- Date de début -->
+            <DatePicker fx:id="dateDebutField" prefWidth="250" promptText="Date de début" />
+
+            <!-- Date de fin -->
+            <DatePicker fx:id="dateFinField" prefWidth="250" promptText="Date de fin" />
+
+            <!-- Type : Stage ou Alternance -->
+            <ComboBox fx:id="typeField" prefWidth="250">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="stage" />
+                        <String fx:value="alternance" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <Button fx:id="validerButton" prefWidth="150" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Valider" />
+
+        </VBox>
+
+    </children>
+</AnchorPane>

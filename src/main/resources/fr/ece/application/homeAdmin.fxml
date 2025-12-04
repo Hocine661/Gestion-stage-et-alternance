@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="fr.ece.application.HomeControllerAdmin">
+
+    <children>
+
+
+        <Label layoutX="220.0" layoutY="20.0"
+               text="Liste des utilisateurs"
+               style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+
+        <TableView fx:id="userTable"
+                   layoutX="30.0" layoutY="70.0"
+                   prefHeight="300.0" prefWidth="540.0">
+
+            <columns>
+                <TableColumn fx:id="emailCell"
+                             prefWidth="170"
+                             text="Email" />
+
+                <TableColumn fx:id="entrepriseCell"
+                             prefWidth="140"
+                             text="Entreprise" />
+
+                <TableColumn fx:id="dateCell"
+                             prefWidth="70"
+                             text="Date" />
+
+                <TableColumn fx:id="typeCell"
+                             prefWidth="70"
+                             text="Type" />
+
+                <TableColumn fx:id="validationCell"
+                             prefWidth="90"
+                             text="Validation" />
+            </columns>
+
+        </TableView>
+
+    </children>
+
+</AnchorPane>
+

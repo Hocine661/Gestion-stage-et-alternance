@@ -6,7 +6,7 @@ import dao.UtilisateurDAO;
 import model.Utilisateur;
 import org.mindrot.jbcrypt.BCrypt;
 
-public class securiteEtService {
+public class SecuriteEtService {
     private UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
     public boolean registerUser(String nom, String prenom,String email, String motDePasseClair, String role) {
 
@@ -28,7 +28,11 @@ public class securiteEtService {
         return utilisateurDAO.insert(newUtilisateur);
     }
 
-    public boolean verifyPassword(String motDePasseClair, String motDePasseHacheBdd) {
-        return BCrypt.checkpw(motDePasseClair, motDePasseHacheBdd);
+    public Utilisateur loginUser(String email, String motDePasseClair) {
+        Utilisateur utilisateur = utilisateurDAO.findByEmail(email);
+        if (utilisateur != null && BCrypt.checkpw(motDePasseClair, utilisateur.getMotdepasse())) {
+            return utilisateur;
+        }
+        return null;
     }
 }

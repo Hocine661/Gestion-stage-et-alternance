@@ -5,6 +5,7 @@ module fr.ece.application {
     requires javafx.base;
     requires javafx.graphics;
     requires java.desktop;
+    requires jbcrypt;
 
 
     // <<< OBLIGATOIRE POUR UTILISER JDBC

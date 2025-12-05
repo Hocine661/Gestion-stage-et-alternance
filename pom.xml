@@ -44,6 +44,12 @@
             <artifactId>mysql-connector-j</artifactId>
             <version>8.3.0</version>
         </dependency>
+        <!-- Ajout de JBCRYPT pour le hashage de mot de passe (Ne pas supprimer)  -->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
 
     </dependencies>
 

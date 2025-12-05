@@ -33,4 +33,22 @@ public class UtilisateurDAO {
 
         return null;
     }
+
+    public boolean insert(Utilisateur utilisateur) {
+        String sql = "INSERT INTO utilisateur (nom, prenom, email, mot_de_passe, role) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = dao.DatabaseConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+            pst.setString(1, utilisateur.getNom());
+            pst.setString(2, utilisateur.getPrenom());
+            pst.setString(3, utilisateur.getEmail());
+            pst.setString(4, utilisateur.getMotdepasse());
+            pst.setString(5, utilisateur.getRole());
+            int rowsAffected = pst.executeUpdate();
+            return rowsAffected > 0; // Retourne true si l'insertion a réussi
+
+        } catch (SQLException e) {
+            System.err.println("Erreur DAO Utilisateur (Insert) : " + e.getMessage());
+            return false;
+        }
+    }
 }

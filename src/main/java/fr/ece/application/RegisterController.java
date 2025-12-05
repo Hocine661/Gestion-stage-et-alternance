@@ -2,6 +2,7 @@ package fr.ece.application;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import services.SecuriteEtService;
 
 public class RegisterController {
 
@@ -28,8 +29,7 @@ public class RegisterController {
     @FXML
     private ToggleGroup roleGroup;
 
-
-
+    private final SecuriteEtService securiteService =  new SecuriteEtService();
 
 
     @FXML
@@ -52,8 +52,7 @@ public class RegisterController {
             return;
         }
 
-        //En attent de la création d'un package pour gerer la connexion, les mots de passes.....
-        boolean success = .registerUser(nom, prenom, email, motDePasse, role);
+        boolean success = securiteService.registerUser(nom, prenom, email, motDePasse, role);
 
         if (success) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Inscription réussie !");

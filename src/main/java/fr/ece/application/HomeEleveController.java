@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import services.UserSession;
 
@@ -80,7 +81,7 @@ public class HomeEleveController {
             default: // en attente
                 statusLabel.setStyle("-fx-padding: 6 10; -fx-background-radius: 999;"
                         + "-fx-background-color: #fff7e6; -fx-text-fill: #8a5a00; -fx-font-weight: 700;");
-                boolean hasDeclaration = true; // TODO: interroger la BDD
+                boolean hasDeclaration = false; // TODO: interroger la BDD
                 declareBtn.setVisible(!hasDeclaration);
                 editDeclarationBtn.setVisible(hasDeclaration);
         }
@@ -110,7 +111,24 @@ public class HomeEleveController {
     }
 
     // ===== Actions =====
-    @FXML private void declareInternship() { /* TODO: ouvrir formulaire de déclaration */ }
+    @FXML private void declareInternship() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("declaration.fxml")); // Utilisez le nom exact de votre fichier FXML
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Déclaration de Stage / Alternance");
+            Stage currentStage = (Stage) declareBtn.getScene().getWindow();
+            stage.initOwner(currentStage);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            initialize();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Erreur : Impossible d'ouvrir le formulaire de déclaration (Vérifiez le nom du fichier FXML).").showAndWait();
+        }
+    }
     @FXML private void editInternship()    { /* TODO: ouvrir formulaire en édition */ }
     @FXML private void uploadDocument()    { /* TODO: file chooser + upload */ }
     @FXML private void openDocuments()     { /* TODO: naviguer vers documents */ }

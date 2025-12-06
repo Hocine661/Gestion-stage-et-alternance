@@ -15,8 +15,8 @@ public class Declaration {
 
     public Declaration() {
         this.idDeclaration = idDeclaration;
-        dateDebut = dateDebut;
-        dateFin = dateFin;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
         this.type = type;
         this.mission = mission;
         this.statut = statut;

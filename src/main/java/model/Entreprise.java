@@ -9,10 +9,10 @@ public class Entreprise {
 
     public Entreprise() {
         this.idEntreprise = idEntreprise;
-        nom = nom;
-        adresse = adresse;
-        tuteur = tuteur;
-        contact = contact;
+        this.nom = nom;
+        this.adresse = adresse;
+        this.tuteur = tuteur;
+        this.contact = contact;
     }
 
     public int getIdEntreprise() {

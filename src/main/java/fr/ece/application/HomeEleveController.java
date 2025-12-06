@@ -3,11 +3,20 @@
 package fr.ece.application;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import services.UserSession;
 
+import java.io.IOException;
+
 public class HomeEleveController {
+
+    @FXML
+    private Hyperlink deconnexionButton;
 
     @FXML private ImageView logoView;
     @FXML private Label welcomeLabel;
@@ -82,7 +91,23 @@ public class HomeEleveController {
     @FXML private void goDeclarations() { /* TODO: ouvrir vue déclarations */ }
     @FXML private void goDocuments()    { /* TODO: ouvrir module documents */ }
     @FXML private void goProfile()      { /* TODO: ouvrir vue profil */ }
-    @FXML private void logout()         { /* TODO: retour page login */ }
+    @FXML private void logout()         {
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION, "Veillez confirmer que vous souhaitez vous déconnecter !", ButtonType.YES, ButtonType.NO);
+        confirmation.showAndWait();
+        if (confirmation.getResult() == ButtonType.YES) {
+            UserSession.logout();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) welcomeLabel.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Accueil");
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     // ===== Actions =====
     @FXML private void declareInternship() { /* TODO: ouvrir formulaire de déclaration */ }

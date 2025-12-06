@@ -5,6 +5,7 @@ package fr.ece.application;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import services.UserSession;
 
 public class HomeEleveController {
 
@@ -27,8 +28,9 @@ public class HomeEleveController {
 
     @FXML
     public void initialize() {
-        // Données d'exemple — remplace par ta BDD/tes services
-        welcomeLabel.setText("Bienvenue, Sidney !");
+        String prenom = UserSession.getPrenom();
+        welcomeLabel.setText("Welcome " + prenom);
+
         setStatus("En attente");
 
         docsList.getItems().setAll(

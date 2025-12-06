@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Utilisateur;
 import services.SecuriteEtService;
+import services.UserSession;
 
 import java.io.IOException;
 
@@ -40,6 +41,7 @@ public class LoginController {
         Utilisateur utilisateur = securiteService.loginUser(email, motDePasseClair);
 
         if (utilisateur != null) {
+            UserSession.login(utilisateur);
 
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Connexion réussie ! Bienvenue " + utilisateur.getPrenom() + ".");

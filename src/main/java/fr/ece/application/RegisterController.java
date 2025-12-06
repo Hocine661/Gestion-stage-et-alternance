@@ -1,8 +1,14 @@
 package fr.ece.application;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import services.SecuriteEtService;
+
+import java.io.IOException;
 
 public class RegisterController {
 
@@ -57,9 +63,29 @@ public class RegisterController {
         if (success) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Inscription réussie !");
             alert.showAndWait();
+
+            redirectToLogin();
+
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Erreur lors de l'inscription. Verifier votre email.");
             alert.showAndWait();
         }
     }
+
+    private void redirectToLogin() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) nomField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Connexion");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Erreur: Impossible de charger la page connexion!");
+            alert.showAndWait();
+        }
+    }
 }
+

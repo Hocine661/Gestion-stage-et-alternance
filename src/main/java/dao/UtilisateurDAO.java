@@ -2,8 +2,6 @@ package dao;
 
 import model.Utilisateur;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UtilisateurDAO {
 

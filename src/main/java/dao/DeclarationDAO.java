@@ -2,9 +2,7 @@ package dao;
 
 import model.Declaration;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class DeclarationDAO {
 
@@ -36,5 +34,25 @@ public class DeclarationDAO {
 
         return null;
     }
+
+    public boolean insert(Declaration declaration) {
+        String sql = "INSERT INTO declaration (date_debut, date_fin, type, mission, statut, idUtilisateur, idEntreprise)" + " VALUES (?, ?, ?, ?, 'en attente', ?, ?)";
+        try (Connection conn = dao.DatabaseConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+            pst.setDate(1, Date.valueOf(declaration.getDateDebut()));
+            pst.setDate(2, Date.valueOf(declaration.getDateFin()));
+            pst.setString(3, declaration.getType());
+            pst.setString(4, declaration.getMission());
+            pst.setInt(5, declaration.getIdUtilisateur());
+            pst.setInt(6, declaration.getIdEntreprise());
+            int rowsAffected = pst.executeUpdate();
+            return rowsAffected > 0; // Retourne true si l'insertion a réussi
+
+        } catch (SQLException e) {
+            System.err.println("Erreur DAO declaration (Insert) : " + e.getMessage());
+            return false;
+        }
+    }
+
 }
 

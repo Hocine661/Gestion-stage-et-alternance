@@ -53,6 +53,5 @@ public class DeclarationDAO {
             return false;
         }
     }
-
 }
 

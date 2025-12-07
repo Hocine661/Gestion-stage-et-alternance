@@ -10,11 +10,20 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Declaration;
+import model.Entreprise;
+import model.Utilisateur;
+import services.EntrepriseService;
+import services.ServiceDeclaration;
 import services.UserSession;
 
 import java.io.IOException;
 
 public class HomeEleveController {
+
+
+    private final ServiceDeclaration serviceDeclaration = new ServiceDeclaration();
+    private final EntrepriseService entrepriseService = new EntrepriseService();
 
     @FXML
     private Hyperlink deconnexionButton;
@@ -38,53 +47,74 @@ public class HomeEleveController {
 
     @FXML
     public void initialize() {
-        String prenom = UserSession.getPrenom();
+        Utilisateur currentUser = UserSession.getCurrentUser();
+        String prenom = currentUser != null? currentUser.getPrenom(): "Etudiant";
         welcomeLabel.setText("Welcome " + prenom);
-
-        setStatus("En attente");
 
         docsList.getItems().setAll(
                 "Convention de stage — Manquante",
                 "Attestation — Déposée (12/10/2025)"
         );
 
-        companyName.setText("ACME Corp.");
-        companyAddress.setText("10 rue des Lilas, 75012 Paris");
-        companyTutor.setText("Mme Dupont");
-        companyContact.setText("dupont@acme.com / 01 45 00 00 00");
+        Declaration declaration = serviceDeclaration.findActiveDeclarationByEleveId(currentUser.getIdUtilisateur());
+        docsList.getItems().clear();
+        commentsList.getItems().clear();
+        clearCompanyInfo();
 
-        commentsList.getItems().setAll(
-                "[02/12] Merci d’ajouter la signature manquante sur la convention.",
-                "[28/11] Déclaration reçue, en cours d’examen."
-        );
+        if (declaration != null) {
+            setStatus(declaration.getStatut(), true);
+            Entreprise entreprise = entrepriseService.getEntrepriseById(declaration.getIdEntreprise());
+
+            if (entreprise != null) {
+                companyName.setText(entreprise.getNom());
+                companyAddress.setText(entreprise.getAdresse());
+                companyTutor.setText(entreprise.getTuteur());
+                companyContact.setText(entreprise.getContact());
+            }
+
+            // Ajouter la base pour celui la
+            docsList.getItems().setAll(
+                    "Convention de stage — Déposée (via BDD)",
+                    "Attestation — Manquante"
+            );
+
+        } else {
+            setStatus("Nouveau", false);
+        }
     }
 
-    private void setStatus(String status) {
-        // Met le texte du statut et applique le style inline correspondant
+   //Effacer les champs si plus nécissaires, par exemple refusé
+    private void clearCompanyInfo() {
+        companyName.setText("—");
+        companyAddress.setText("—");
+        companyTutor.setText("—");
+        companyContact.setText("—");
+    }
+
+    private void setStatus(String status, boolean hasDeclaration) {
         statusLabel.setText(status);
+        boolean isDeclared = hasDeclaration;
         switch (status.toLowerCase()) {
             case "validé":
             case "valide":
-                statusLabel.setStyle("-fx-padding: 6 10; -fx-background-radius: 999;"
-                        + "-fx-background-color: #e6ffed; -fx-text-fill: #05603a; -fx-font-weight: 700;");
-                declareBtn.setVisible(false);
-                editDeclarationBtn.setVisible(false);
+                isDeclared = true;
                 break;
             case "à corriger":
             case "refusé":
             case "refuse":
-                statusLabel.setStyle("-fx-padding: 6 10; -fx-background-radius: 999;"
-                        + "-fx-background-color: #ffe6e6; -fx-text-fill: #7a0619; -fx-font-weight: 700;");
-                declareBtn.setVisible(false);
-                editDeclarationBtn.setVisible(true);
+                isDeclared = true;
                 break;
-            default: // en attente
+            default:
                 statusLabel.setStyle("-fx-padding: 6 10; -fx-background-radius: 999;"
                         + "-fx-background-color: #fff7e6; -fx-text-fill: #8a5a00; -fx-font-weight: 700;");
-                boolean hasDeclaration = false; // TODO: interroger la BDD
-                declareBtn.setVisible(!hasDeclaration);
-                editDeclarationBtn.setVisible(hasDeclaration);
+
+                if (!hasDeclaration) {
+                    statusLabel.setText("Non déclarée"); // Afficher un statut clair pour le nouveau
+                }
+                break;
         }
+        declareBtn.setVisible(!isDeclared);
+        editDeclarationBtn.setVisible(isDeclared);
     }
 
     // ===== Menu =====

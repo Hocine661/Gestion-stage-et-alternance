@@ -1,14 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="fr.ece.application.ListeUtilisateur"
             prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+
+        <!-- Titre -->
+        <Label layoutX="200.0" layoutY="20.0"
+               style="-fx-font-size: 18px; -fx-font-weight: bold;"
+               text="Liste des utilisateurs" />
+
+        <!-- Tableau des utilisateurs -->
+        <TableView fx:id="userTable" layoutX="30.0" layoutY="70.0"
+                   prefHeight="300.0" prefWidth="540.0">
+
+            <columns>
+                <TableColumn fx:id="nomCell" prefWidth="180.0" text="Nom" />
+                <TableColumn fx:id="prenomCell" prefWidth="180.0" text="Prénom" />
+                <TableColumn fx:id="emailCell" prefWidth="180.0" text="Email" />
+            </columns>
+
+        </TableView>
+
+    </children>
 
 </AnchorPane>

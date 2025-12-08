@@ -16,7 +16,7 @@ public class LoginApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminEntreprise.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
         Scene scene = new Scene(loader.load());
         primaryStage.setScene(scene);
         primaryStage.setTitle("Connectez-vous");

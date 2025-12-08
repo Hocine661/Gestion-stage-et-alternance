@@ -14,7 +14,7 @@ import model.DeclarationView;
 import javafx.collections.ObservableList;
 
 
-public class HomeControllerAdmin {
+public class ListeUtilisateur {
 
     // ===== TableView & Columns =====
     @FXML

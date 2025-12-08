@@ -101,21 +101,20 @@ public class EntrepriseDAO {
         List<Entreprise> entreprises = new ArrayList<>();
         String sql = "SELECT * FROM entreprise";
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = dao.DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Entreprise e = new Entreprise();
-                e.setIdEntreprise(rs.getInt("idEntreprise"));
-                e.setNom(rs.getString("nom"));
-                e.setAdresse(rs.getString("adresse"));
-                e.setTuteur(rs.getString("tuteur"));
-                e.setContact(rs.getString("contact"));
+                // ... (votre mappage est ici) ...
+
+                // AJOUTER UNE LIGNE DE DÉBOGAGE ICI :
+                System.out.println("DEBUG : Entreprise trouvée -> " + rs.getString("nom"));
+
                 entreprises.add(e);
             }
-
-        } catch (SQLException e) {
+        } catch (SQLException e)  {
             System.err.println("Erreur DAO Entreprise (findAll) : " + e.getMessage());
             e.printStackTrace();
         }

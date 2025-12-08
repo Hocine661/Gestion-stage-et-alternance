@@ -41,8 +41,9 @@ public class ListeEntreprise {
     private void loadTableData() {
 
         ObservableList<Entreprise> list =
-                FXCollections.observableArrayList(entrepriseDAO.findAllUsedByDeclarations());
-
+                FXCollections.observableArrayList(entrepriseDAO.findAll()); // TEST : Affiche toutes les entreprises
         userTable.setItems(list);
+
+
     }
 }

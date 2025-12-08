@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.DeclarationView;
 import services.ServiceDeclaration;
@@ -103,6 +104,17 @@ public class ListeDeclarationController {
         ObservableList<DeclarationView> data =
                 FXCollections.observableArrayList(service.getAllDeclarations());
         tableView.setItems(data);
+    }
+
+
+    @FXML
+    private void closeView() {
+        // 1. Utiliser un élément FXML connu (le tableau) pour obtenir la Stage
+        // Si la fenêtre principale de l'Admin ferme l'application, ce n'est pas l'idéal.
+        Stage stage = (Stage) tableView.getScene().getWindow();
+
+        // 2. Fermer la fenêtre
+        stage.close();
     }
 }
 

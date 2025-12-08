@@ -2,14 +2,14 @@ package fr.ece.application;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.Stage; // Pour fermer la vue si nécessaire
+import javafx.stage.Stage;
 import java.sql.*;
-import java.time.LocalDate; // Pour la date du commentaire
+import java.time.LocalDate;
 
 // Importations correctes
 import services.UserSession;
 import model.Utilisateur;
-import dao.DatabaseConnection; // Supposé être dans le package 'dao'
+import dao.DatabaseConnection;
 import model.Declaration;
 
 public class CommentaireController {
@@ -26,19 +26,14 @@ public class CommentaireController {
     @FXML
     private Label labelAdmin;
 
-    // Contexte de l'utilisateur connecté
     private Utilisateur currentUser = UserSession.getCurrentUser();
     private String roleUtilisateur = currentUser != null ? currentUser.getRole() : "invite";
     private String nomAuteur = currentUser != null ? currentUser.getPrenom() + " " + currentUser.getNom() : "Système";
-
-    // Contexte essentiel : L'ID de la Déclaration actuelle
     private int declarationId = -1;
 
 
     @FXML
     public void initialize() {
-        // Initialisation minimale, la logique d'accès est dans updateViewAccess.
-        // On désactive tout par défaut
         commentaireArea.setDisable(true);
         btnSave.setDisable(true);
 
@@ -46,15 +41,10 @@ public class CommentaireController {
             showAlert(Alert.AlertType.ERROR, "Erreur de session", "Aucun utilisateur connecté.");
         }
     }
-
-    /**
-     * Méthode à appeler par le contrôleur parent (ex: HomeEleveController)
-     * pour définir le contexte de la déclaration.
-     */
     public void setDeclarationContext(Declaration declaration) {
         if (declaration != null) {
             this.declarationId = declaration.getIdDeclaration();
-            // Si vous avez un label pour afficher l'ID de la déclaration, mettez-le à jour ici.
+
         } else {
             showAlert(Alert.AlertType.ERROR, "Erreur de contexte", "L'ID de la Déclaration est manquant. Fonctionnalité commentaire désactivée.");
         }
@@ -63,18 +53,11 @@ public class CommentaireController {
         chargerCommentaire();
     }
 
-    /**
-     * Met à jour la visibilité et l'accès en fonction du rôle.
-     */
     private void updateViewAccess() {
-        // Le rôle 'eleve' est l'élève, 'admin' ou 'scolarité' (d'après register.fxml) est l'administrateur.
         boolean isAdmin = "admin".equalsIgnoreCase(roleUtilisateur) || "scolarité".equalsIgnoreCase(roleUtilisateur);
-
-        // Seul l'admin a le droit d'écrire/modifier
         commentaireArea.setDisable(!isAdmin);
         btnSave.setDisable(!isAdmin);
-        labelAdmin.setVisible(isAdmin); // Assurez-vous que ce label n'est visible que pour l'admin
-    }
+        labelAdmin.setVisible(isAdmin);  }
 
 
     @FXML
@@ -92,8 +75,7 @@ public class CommentaireController {
         try (Connection conn = DatabaseConnection.getConnection()) {
 
             // Requête corrigée : utilise idDeclaration, date, et auteur.
-            // ON DUPLICATE KEY UPDATE ne fonctionne que si vous avez mis une clé UNIQUE sur idDeclaration dans votre BDD.
-            String sql = """
+           String sql = """
                 INSERT INTO commentaire (contenu, date, auteur, idDeclaration)
                 VALUES (?, ?, ?, ?)
                 ON DUPLICATE KEY UPDATE contenu = ?, date = ?, auteur = ?
@@ -112,9 +94,8 @@ public class CommentaireController {
 
             ps.executeUpdate();
 
-            // Mettre à jour l'affichage
             commentaireAffiche.setText(commentaireArea.getText());
-            commentaireArea.clear(); // Effacer la zone de saisie pour confirmer l'envoi
+            commentaireArea.clear();
 
             showAlert(Alert.AlertType.INFORMATION, "Succès", "Commentaire enregistré avec succès.");
 
@@ -139,7 +120,6 @@ public class CommentaireController {
 
             if (rs.next()) {
                 commentaireAffiche.setText(rs.getString("contenu"));
-                // Remplir l'aire de saisie (pour l'admin) avec le commentaire chargé
                 if (!commentaireArea.isDisable()) {
                     commentaireArea.setText(rs.getString("contenu"));
                 }

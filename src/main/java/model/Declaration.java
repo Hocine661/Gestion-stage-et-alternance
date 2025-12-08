@@ -14,14 +14,7 @@ public class Declaration {
     private int idEntreprise;
 
     public Declaration() {
-        this.idDeclaration = idDeclaration;
-        this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
-        this.type = type;
-        this.mission = mission;
-        this.statut = statut;
-        this.idUtilisateur = idUtilisateur;
-        this.idEntreprise = idEntreprise;
+
     }
 
     public int getIdDeclaration() {

@@ -10,9 +10,13 @@ module fr.ece.application {
 
 
     // <<< OBLIGATOIRE POUR UTILISER JDBC
-
     opens fr.ece.application to javafx.fxml;
     exports fr.ece.application;
+
+    exports model;
+    exports services;
     exports dao;
     opens dao;
+    opens model to javafx.base, javafx.fxml;
+
 }

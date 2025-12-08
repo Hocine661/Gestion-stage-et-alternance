@@ -51,6 +51,14 @@ public class HomeEleveController {
     @FXML
     public void initialize() {
         Utilisateur currentUser = UserSession.getCurrentUser();
+
+        if (currentUser == null || currentUser.getIdUtilisateur() <= 0) {
+            welcomeLabel.setText("ERREUR: Utilisateur non chargé.");
+            setStatus("ERREUR", false);
+            return; // Arrêter l'initialisation pour éviter le plantage
+        }
+
+
         String prenom = currentUser != null? currentUser.getPrenom(): "Etudiant";
         welcomeLabel.setText("Welcome " + prenom);
 

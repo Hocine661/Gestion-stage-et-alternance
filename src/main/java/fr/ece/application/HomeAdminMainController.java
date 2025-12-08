@@ -46,7 +46,7 @@ public class HomeAdminMainController {
     }
     @FXML
     private void openDeclarations() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/ece/application/declaration.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/ece/application/listeDeclaration.fxml"));
         Parent root = loader.load();
         btnDeclarations.getScene().setRoot(root);
     }

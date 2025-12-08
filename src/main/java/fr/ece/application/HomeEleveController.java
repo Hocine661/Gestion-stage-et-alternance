@@ -38,12 +38,15 @@ public class HomeEleveController {
 
     // Documents
     @FXML private ListView<String> docsList;
+    @FXML
+    private Button documentButton;
 
     // Entreprise
     @FXML private Label companyName, companyAddress, companyTutor, companyContact;
 
     // Commentaires
     @FXML private ListView<String> commentsList;
+
 
     @FXML
     public void initialize() {
@@ -160,9 +163,49 @@ public class HomeEleveController {
         }
     }
     @FXML private void editInternship()    { /* TODO: ouvrir formulaire en édition */ }
-    @FXML private void uploadDocument()    { /* TODO: file chooser + upload */ }
+    @FXML private void uploadDocument()    {
+        try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("document.fxml")); // Utilisez le nom exact de votre fichier FXML
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Déclaration de Stage / Alternance");
+        Stage currentStage = (Stage) documentButton.getScene().getWindow();
+        stage.initOwner(currentStage);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+        initialize();
+
+    } catch (IOException e) {
+        e.printStackTrace();
+        new Alert(Alert.AlertType.ERROR, "Erreur : Impossible d'ouvrir le formulaire de déclaration (Vérifiez le nom du fichier FXML).").showAndWait();
+    } }
     @FXML private void openDocuments()     { /* TODO: naviguer vers documents */ }
     @FXML private void editCompany()       { /* TODO: éditer entreprise */ }
     @FXML private void openCompany()       { /* TODO: détails entreprise */ }
-    @FXML private void openCommentsHistory(){ /* TODO: historique complet */ }
+    @FXML private void openCommentsHistory(){
+        Declaration activeDeclaration = serviceDeclaration.findActiveDeclarationByEleveId(UserSession.getCurrentUser().getIdUtilisateur());
+        if (activeDeclaration == null) {
+            new Alert(Alert.AlertType.WARNING, "Veuillez d'abord déclarer un stage/alternance.").showAndWait();
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("commentaire.fxml"));
+            Parent root = loader.load();
+
+            // ÉTAPE CRUCIALE : Injecter le contexte de la déclaration
+            CommentaireController controller = loader.getController();
+            controller.setDeclarationContext(activeDeclaration);
+
+            Stage stage = new Stage();
+            stage.setTitle("Historique des Commentaires");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Erreur lors du chargement de la vue des commentaires.").showAndWait();
+        }
+    }
 }

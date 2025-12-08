@@ -4,8 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -25,25 +27,71 @@ public class HomeAdminMainController {
         adminNameLabel.setText("Admin : " + CurrentUser.fullName);
     }
 
+
+
+
+
     @FXML
-    private void openDeclarations() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/ece/application/listeDeclaration.fxml"));
-        Parent root = loader.load();
-        btnDeclarations.getScene().setRoot(root);
+    private void openDeclarations()  {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("listeDeclaration.fxml")); // Utilisez le nom exact de votre fichier FXML
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Déclaration de Stage / Alternance");
+            Stage currentStage = (Stage) btnDeclarations.getScene().getWindow();
+            stage.initOwner(currentStage);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            initialize();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Erreur : Impossible d'ouvrir le formulaire de déclaration (Vérifiez le nom du fichier FXML).").showAndWait();
+        }
+         }
+
+    @FXML
+    private void openEtudiants()  {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("listeUtilisateur.fxml")); // Utilisez le nom exact de votre fichier FXML
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Déclaration de Stage / Alternance");
+            Stage currentStage = (Stage) btnDeclarations.getScene().getWindow();
+            stage.initOwner(currentStage);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            initialize();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Erreur : Impossible d'ouvrir le formulaire de déclaration (Vérifiez le nom du fichier FXML).").showAndWait();
+        }
+
     }
 
     @FXML
-    private void openEtudiants() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/ece/application/listeUtilisateur.fxml"));
-        Parent root = loader.load();
-        btnEtudiants.getScene().setRoot(root);
-    }
+    private void openEntreprises()  {
 
-    @FXML
-    private void openEntreprises() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/ece/application/listeEntreprise.fxml"));
-        Parent root = loader.load();
-        btnEntreprises.getScene().setRoot(root);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("listeEntreprise.fxml")); // Utilisez le nom exact de votre fichier FXML
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Déclaration de Stage / Alternance");
+            Stage currentStage = (Stage) btnDeclarations.getScene().getWindow();
+            stage.initOwner(currentStage);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            initialize();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Erreur : Impossible d'ouvrir le formulaire de déclaration (Vérifiez le nom du fichier FXML).").showAndWait();
+        }
+
     }
 
     @FXML

@@ -34,7 +34,6 @@ public class HomeEleveController {
     // Statut
     @FXML private Label statusLabel;
     @FXML private Button declareBtn;
-    @FXML private Button editDeclarationBtn;
 
     // Documents
     @FXML private ListView<String> docsList;
@@ -139,7 +138,6 @@ public class HomeEleveController {
 
         // Logique de visibilité
         declareBtn.setVisible(!isDeclared); // Visible si Refusé ou Non déclarée
-        editDeclarationBtn.setVisible(isDeclared); // Visible si Validé, À corriger, ou En attente
     }
 
     // ===== Menu =====

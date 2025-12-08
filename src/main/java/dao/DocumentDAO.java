@@ -5,6 +5,7 @@ import model.Document;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,27 @@ public class DocumentDAO {
         }
 
         return docs;
+    }
+
+
+    public boolean insert(Document document) {
+        // La requête utilise la fonction NOW() de MySQL pour stocker la date/heure actuelle du dépôt
+        String sql = "INSERT INTO document (type, chemin_fichier, date_depot, idDeclaration) VALUES (?, ?, NOW(), ?)";
+
+        try (Connection conn = dao.DatabaseConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setString(1, document.getType());
+            pst.setString(2, document.getCheminFichier());
+            pst.setInt(3, document.getIdDeclaration());
+
+            int rowsAffected = pst.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Erreur DAO Document (Insert) : " + e.getMessage());
+            return false;
+        }
     }
 }
 

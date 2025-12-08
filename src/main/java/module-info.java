@@ -6,6 +6,7 @@ module fr.ece.application {
     requires javafx.graphics;
     requires java.desktop;
     requires jbcrypt;
+    requires mysql.connector.j;
 
 
     // <<< OBLIGATOIRE POUR UTILISER JDBC

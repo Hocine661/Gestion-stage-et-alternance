@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="CONTROLLER_NAME"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="fr.ece.application.CommentaireController"
+      spacing="15"
+      alignment="TOP_CENTER"
+      prefWidth="600"
+      prefHeight="400">
 
-</AnchorPane>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Titre -->
+    <Label text="Espace commentaires"
+           style="-fx-font-size:18px; -fx-font-weight: bold;"/>
+
+    <!-- Commentaire affiché pour l'élève -->
+    <Label text="Commentaire de l'administration :"/>
+    <TextArea fx:id="commentaireAffiche"
+              editable="false"
+              wrapText="true"
+              prefHeight="120"/>
+
+    <!-- Partie réservée à l'Admin -->
+    <Label fx:id="labelAdmin"
+           text="Ajouter / modifier un commentaire (Admin uniquement)"
+           style="-fx-font-weight: bold;"/>
+
+    <TextArea fx:id="commentaireArea"
+              promptText="Écrivez votre commentaire ici..."
+              wrapText="true"
+              prefHeight="120"/>
+
+    <!-- Bouton -->
+    <Button fx:id="btnSave"
+            text="Enregistrer le commentaire"
+            onAction="#ajouterCommentaire"
+            prefWidth="220"/>
+
+</VBox>

@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="fr.ece.application.CommentaireController"
+      spacing="15"
+      alignment="TOP_CENTER"
+      prefWidth="600"
+      prefHeight="400">
 
-    <!-- TITRE EN HAUT -->
-    <top>
-        <Label text="Gestion des Commentaires"
-               style="-fx-font-size: 20px; -fx-font-weight: bold;"
-               BorderPane.alignment="CENTER"/>
-    </top>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
 
-    <!-- LISTE DES COMMENTAIRES -->
-    <center>
-        <ListView fx:id="listCommentaires"
-                  prefHeight="300"
-                  prefWidth="500"
-                  BorderPane.alignment="CENTER"/>
-    </center>
+    <!-- Titre -->
+    <Label text="Espace commentaires"
+           style="-fx-font-size:18px; -fx-font-weight: bold;"/>
 
-    <!-- AJOUT D'UN COMMENTAIRE EN BAS -->
-    <bottom>
-        <VBox spacing="10" padding="15">
-            <Label text="Ajouter un commentaire :"
-                   style="-fx-font-size: 14px;"/>
+    <!-- Commentaire affiché pour l'élève -->
+    <Label text="Commentaire de l'administration :"/>
+    <TextArea fx:id="commentaireAffiche"
+              editable="false"
+              wrapText="true"
+              prefHeight="120"/>
 
-            <TextArea fx:id="txtCommentaire"
-                      prefRowCount="3"/>
+    <!-- Partie réservée à l'Admin -->
+    <Label fx:id="labelAdmin"
+           text="Ajouter / modifier un commentaire (Admin uniquement)"
+           style="-fx-font-weight: bold;"/>
 
-            <Button fx:id="btnAjouter"
-                    text="Ajouter le commentaire"
-                    style="-fx-padding: 10; -fx-font-size: 14px;"/>
-        </VBox>
-    </bottom>
+    <TextArea fx:id="commentaireArea"
+              promptText="Écrivez votre commentaire ici..."
+              wrapText="true"
+              prefHeight="120"/>
 
-</BorderPane>
+    <!-- Bouton -->
+    <Button fx:id="btnSave"
+            text="Enregistrer le commentaire"
+            onAction="#ajouterCommentaire"
+            prefWidth="220"/>
+
+</VBox>

@@ -4,8 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
+<VBox xmlns="http://javafx.com/javafx/21.0.6"
+      xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="fr.ece.application.CommentaireController"
       spacing="15"
       alignment="TOP_CENTER"
@@ -30,17 +30,23 @@
     <!-- Partie réservée à l'Admin -->
     <Label fx:id="labelAdmin"
            text="Ajouter / modifier un commentaire (Admin uniquement)"
-           style="-fx-font-weight: bold;"/>
+           style="-fx-font-weight: bold;"
+           visible="false"
+           managed="false"/>
 
     <TextArea fx:id="commentaireArea"
               promptText="Écrivez votre commentaire ici..."
               wrapText="true"
-              prefHeight="120"/>
+              prefHeight="120"
+              visible="false"
+              managed="false"/>
 
     <!-- Bouton -->
     <Button fx:id="btnSave"
             text="Enregistrer le commentaire"
             onAction="#ajouterCommentaire"
-            prefWidth="220"/>
+            prefWidth="220"
+            visible="false"
+            managed="false"/>
 
 </VBox>

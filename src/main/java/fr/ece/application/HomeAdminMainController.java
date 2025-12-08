@@ -24,26 +24,12 @@ public class HomeAdminMainController {
         // Affichage du nom admin
         adminNameLabel.setText("Admin : " + CurrentUser.fullName);
 
-        btnDeclarations.setOnAction(e -> openPage("homeAdminDeclarations.fxml"));
-        btnEtudiants.setOnAction(e -> openPage("listeEtudiants.fxml"));
-        btnEntreprises.setOnAction(e -> openPage("AdminEntreprises.fxml"));
-        btnCommentaires.setOnAction(e -> openPage("commentaire.fxml"));
 
-        // Déconnexion
-        btnLogout.setOnAction(e -> openPage("login.fxml"));
+
+
     }
 
-    private void openPage(String fxml) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-            Parent root = loader.load();
-            Stage stage = (Stage) btnDeclarations.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception ex) {
-            System.out.println("Erreur : " + ex.getMessage());
-        }
-    }
+
     @FXML
     private void openDeclarations() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/ece/application/listeDeclaration.fxml"));

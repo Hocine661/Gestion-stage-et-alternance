@@ -15,4 +15,6 @@ module fr.ece.application {
     exports fr.ece.application;
     exports dao;
     opens dao;
+    opens model to javafx.base, javafx.fxml;
+
 }

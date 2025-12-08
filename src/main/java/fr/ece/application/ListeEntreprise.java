@@ -30,20 +30,28 @@ public class ListeEntreprise {
 
     @FXML
     public void initialize() {
+        // Associer les colonnes aux propriétés de la classe Entreprise
         nomCell.setCellValueFactory(new PropertyValueFactory<>("nom"));
         adresseCell.setCellValueFactory(new PropertyValueFactory<>("adresse"));
         tuteurCell.setCellValueFactory(new PropertyValueFactory<>("tuteur"));
         contactCell.setCellValueFactory(new PropertyValueFactory<>("contact"));
-        
+
+        // Charger les données de la base
         loadTableData();
     }
 
     private void loadTableData() {
+        try {
+            ObservableList<Entreprise> list =
+                    FXCollections.observableArrayList(entrepriseDAO.findAll());
+            userTable.setItems(list);
 
-        ObservableList<Entreprise> list =
-                FXCollections.observableArrayList(entrepriseDAO.findAll()); // TEST : Affiche toutes les entreprises
-        userTable.setItems(list);
+            // DEBUG : vérifier que les entreprises sont bien chargées
+            list.forEach(e -> System.out.println("Entreprise chargée : " + e.getNom()));
 
-
+        } catch (Exception e) {
+            System.err.println("Erreur lors du chargement des entreprises : " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

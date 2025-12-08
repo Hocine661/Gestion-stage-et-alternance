@@ -1,14 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="CONTROLLER_NAME"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ece.application.DocumentController">
+    <children>
+        <VBox alignment="TOP_CENTER" prefHeight="530.0" prefWidth="730.0" spacing="20.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <children>
+                <Label text="Gestion des Documents de la Déclaration" textFill="#3e6296">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
 
+                <Label fx:id="declarationInfoLabel" text="Dossier Élève/Admin – Statut: [À Corriger]" textFill="#555555">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+
+                <VBox prefHeight="350.0" prefWidth="730.0" spacing="10.0">
+                    <children>
+                        <Label text="Documents Déposés" style="-fx-font-weight: bold;" />
+                        <TableView fx:id="documentTable" prefHeight="300.0" prefWidth="730.0">
+                            <columns>
+                                <TableColumn fx:id="typeColumn" prefWidth="150.0" text="Type de Document" />
+                                <TableColumn fx:id="cheminColumn" prefWidth="200.0" text="Nom du Fichier" />
+                                <TableColumn fx:id="dateColumn" prefWidth="120.0" text="Date de Dépôt" />
+                                <TableColumn fx:id="statusColumn" prefWidth="120.0" text="Statut Vérification" />
+
+                                <TableColumn fx:id="actionColumn" prefWidth="120.0" text="Actions" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </VBox>
+
+                <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="730.0" spacing="15.0">
+
+                    <Label text="Type à déposer :"/>
+                    <ChoiceBox fx:id="typeChoiceBox" prefWidth="150.0" />
+
+                    <Button fx:id="uploadButton" mnemonicParsing="false" onAction="#handleUploadDocument" text="Déposer un Fichier" style="-fx-background-color: #007BFF; -fx-text-fill: white;">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Button>
+
+                    <Label fx:id="selectedFileLabel" text="Aucun fichier sélectionné" />
+
+                    <HBox alignment="CENTER_RIGHT" prefHeight="70.0" prefWidth="400.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                        <Button mnemonicParsing="false" onAction="#closeView" text="Fermer" />
+                    </HBox>
+                </HBox>
+            </children>
+            <padding>
+                <Insets top="10.0" />
+            </padding>
+        </VBox>
+    </children>
 </AnchorPane>

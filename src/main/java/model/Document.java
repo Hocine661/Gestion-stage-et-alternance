@@ -7,13 +7,15 @@ public class Document {
     private int IdDocument;
     private String type;
     private String cheminFichier;
-    private Date dateDepot;
+    private LocalDate dateDepot;
+    private int idDeclaration;
 
     public Document() {
-        IdDocument = IdDocument;
+        this.IdDocument = IdDocument;
         this.type = type;
         this.cheminFichier = cheminFichier;
-        dateDepot = dateDepot;
+        this.dateDepot = dateDepot;
+        this.idDeclaration = idDeclaration;
     }
 
     public int getIdDocument() {
@@ -40,15 +42,21 @@ public class Document {
         this.cheminFichier = cheminFichier;
     }
 
-    public Date getDateDepot() {
+    public LocalDate getDateDepot() {
         return dateDepot;
-    }
-
-    public void setDateDepot(Date dateDepot) {
-        dateDepot = dateDepot;
     }
 
     public void setDateDepot(LocalDate dateDepot) {
 
+        this.dateDepot = dateDepot;
     }
+
+    public int getIdDeclaration() {
+        return idDeclaration;
+    }
+
+    public void setIdDeclaration(int idDeclaration) {
+        this.idDeclaration = idDeclaration;
+    }
+
 }

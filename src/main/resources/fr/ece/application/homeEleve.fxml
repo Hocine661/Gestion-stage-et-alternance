@@ -3,6 +3,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <BorderPane style="-fx-font-family: 'Segoe UI', 'Roboto', 'Sans-Serif'; -fx-background-color: #f6f7fb;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ece.application.HomeEleveController">
 
@@ -18,7 +19,13 @@
 
                 <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: 600;" text="Gestion Stages et Alternance" />
 
-                <Pane HBox.hgrow="ALWAYS" />
+                <Pane HBox.hgrow="ALWAYS">
+               <children>
+                  <Button layoutX="80.0" layoutY="2.0" mnemonicParsing="false" style="-fx-background-radius: 30; -fx-background-color: red;" text="Supprimer" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Button>
+               </children></Pane>
 
                 <Hyperlink onAction="#goDeclarations" text="Mes déclarations" />
                 <Hyperlink fx:id="deconnexionButton" onAction="#logout" text="Déconnexion" />
@@ -70,7 +77,7 @@
                             <ListView fx:id="docsList" prefHeight="140" />
 
                             <HBox spacing="8">
-                                <Button onAction="#uploadDocument" text="Uploader" />
+                                <Button fx:id="documentButton" onAction="#uploadDocument" text="Uploader" />
                                 <Button onAction="#openDocuments" text="Voir tous" />
                             </HBox>
 

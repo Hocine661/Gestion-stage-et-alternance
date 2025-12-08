@@ -36,4 +36,21 @@ public class CommentaireDAO {
 
         return commentaires;
     }
+    public boolean addComment(int idDeclaration, int idAuteur, String contenu) {
+        String sql = "INSERT INTO commentaire (contenu, date, auteur, idDeclaration) VALUES (?, NOW(), ?, ?)";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setString(1, contenu);
+            pst.setInt(2, idAuteur);
+            pst.setInt(3, idDeclaration);
+
+            return pst.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            System.out.println("Erreur addComment : " + e.getMessage());
+            return false;
+        }
+    }
 }

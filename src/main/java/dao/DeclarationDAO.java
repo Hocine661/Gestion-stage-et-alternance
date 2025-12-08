@@ -59,9 +59,9 @@ public class DeclarationDAO {
     public List<DeclarationView> findAllForAdmin() {
         List<DeclarationView> list = new ArrayList<>();
 
-        String sql = "SELECT d.date_debut, d.date_fin, d.type, d.statut, "
+        String sql = "SELECT d.idDeclaration, d.date_debut, d.date_fin, d.type, d.statut, "
                 + "u.email AS userEmail, "
-                + "e.nomEntreprise AS entreprise "
+                + "e.nom AS entreprise "
                 + "FROM declaration d "
                 + "JOIN utilisateur u ON d.idUtilisateur = u.idUtilisateur "
                 + "JOIN entreprise e ON d.idEntreprise = e.idEntreprise";
@@ -72,6 +72,7 @@ public class DeclarationDAO {
 
             while (rs.next()) {
                 DeclarationView v = new DeclarationView(
+                        rs.getInt("idDeclaration"),
                         rs.getString("userEmail"),
                         rs.getString("entreprise"),
                         rs.getDate("date_debut").toLocalDate(),
@@ -88,6 +89,7 @@ public class DeclarationDAO {
 
         return list;
     }
+
 
     public Declaration findActiveDeclarationByEleveId(int idUtilisateur) {
         // Cherche la dernière déclaration soumise par cet utilisateur
@@ -118,5 +120,32 @@ public class DeclarationDAO {
         }
         return null;
     }
-}
+    public void addComment(int idDeclaration, String comment) {
+        String sql = "UPDATE declaration SET commentaire = ? WHERE idDeclaration = ?";
 
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setString(1, comment);
+            pst.setInt(2, idDeclaration);
+            pst.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void updateStatut(int idDeclaration, String statut) {
+        String sql = "UPDATE declaration SET statut = ? WHERE idDeclaration = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setString(1, statut);
+            pst.setInt(2, idDeclaration);
+            pst.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

@@ -1,11 +1,14 @@
 package services;
-
+import dao.CommentaireDAO;
 import dao.DeclarationDAO;
 import model.Declaration;
 import model.Entreprise;
+import model.DeclarationView;
+
+import java.util.List;
 
 public class ServiceDeclaration {
-
+    private final CommentaireDAO commentaireDAO = new CommentaireDAO();
     private final EntrepriseService entrepriseService = new EntrepriseService();
     private final DeclarationDAO declarationDAO = new DeclarationDAO();
     public boolean declareStage(Declaration declaration, Entreprise entreprise, int idUtilisateur) {
@@ -28,4 +31,30 @@ public class ServiceDeclaration {
         // ASSUREZ-VOUS que cette méthode appelle la méthode du DAO qui cherche par idUtilisateur
         return declarationDAO.findActiveDeclarationByEleveId(eleveId);
     }
+    // ---------------------------------------------------------------
+    // 🔹 MÉTHODES AJOUTÉES POUR LA PAGE ADMIN
+    // ---------------------------------------------------------------
+
+    // Récupérer toutes les déclarations pour l’admin
+    public List<DeclarationView> getAllDeclarations() {
+        return declarationDAO.findAllForAdmin();
+    }
+
+    // Modifier le statut d’une déclaration
+    public void updateStatut(int idDeclaration, String newStatus) {
+        declarationDAO.updateStatut(idDeclaration, newStatus);
+    }
+
+    // Ajouter un commentaire
+
+
+    public boolean addComment(int idDeclaration, String comment) {
+        // Récupérer l'auteur connecté automatiquement
+        int idAuteur = UserSession.getCurrentUser().getIdUtilisateur();
+
+        return commentaireDAO.addComment(idDeclaration, idAuteur, comment);
+    }
+
+
 }
+

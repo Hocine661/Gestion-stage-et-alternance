@@ -1,42 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 
-<AnchorPane prefHeight="548.0" prefWidth="713.0" style="-fx-background-color: linear-gradient(to bottom right, #1a73e8, #4fa3ff);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ece.application.HomeAdminMainController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="fr.ece.application.HomeAdminMainController"
+            style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e8f0ff);">
 
-    <!-- ======= HEADER (profil + nom admin + logout) ======= -->
-    <HBox alignment="CENTER_RIGHT" prefHeight="70" spacing="15" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="0">
+    <children>
 
-        <!-- Nom Admin -->
-        <Label fx:id="adminNameLabel" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="Admin: --" />
+        <!-- ===== HEADER ===== -->
+        <HBox alignment="CENTER_RIGHT" spacing="20"
+              prefHeight="80"
+              AnchorPane.leftAnchor="30" AnchorPane.rightAnchor="30" AnchorPane.topAnchor="10">
 
-        <!-- Bouton Déconnexion -->
-        <Button fx:id="btnLogout" onAction="#logout" prefHeight="40" prefWidth="130" style="-fx-background-color: white; -fx-text-fill: #1a73e8;                        -fx-font-size: 16px; -fx-font-weight: bold;                        -fx-background-radius: 10;" text="Déconnexion" />
+            <!-- LOGO TALENTWAVE -->
+            <ImageView fitHeight="160" preserveRatio="true">
+                <image>
+                    <Image url="@logo2.png"/>
+                </image>
+            </ImageView>
 
-    </HBox>
+            <Pane HBox.hgrow="ALWAYS" /> <!-- espace flexible -->
 
-    <!-- ======= CARTE CENTRALE ======= -->
-    <VBox alignment="CENTER" prefHeight="450" prefWidth="600" spacing="25" style="-fx-background-color: white;                  -fx-background-radius: 20;                  -fx-padding: 30;                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 20, 0, 0, 5);" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="90">
+            <!-- Nom Admin -->
+            <Label fx:id="adminNameLabel"
+                   style="-fx-text-fill: black; -fx-font-size: 20px; -fx-font-weight: bold;"
+                   text="Admin: --" />
 
-        <Label style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #1a73e8;" text="Bienvenue dans l’Espace Admin" />
+            <!-- Bouton Déconnexion -->
+            <Button fx:id="btnLogout"
+                    text="Déconnexion"
+                    onAction="#logout"
+                    prefWidth="150" prefHeight="40"
+                    style="-fx-background-color: white;
+                           -fx-text-fill: #2b8af6;
+                           -fx-font-size: 15px;
+                           -fx-font-weight: bold;
+                           -fx-background-radius: 15;" />
+        </HBox>
 
-        <Label style="-fx-font-size: 17px; -fx-text-fill: #333;" text="Choisissez une action :" />
+        <!-- ===== CARD CENTRALE ===== -->
+        <VBox alignment="CENTER" spacing="25"
+              prefWidth="550" prefHeight="450"
+              AnchorPane.leftAnchor="175" AnchorPane.topAnchor="120"
+              style="-fx-background-color: white;
+                     -fx-background-radius: 25;
+                     -fx-padding: 30;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 20, 0, 0, 5);">
 
-        <!-- ======= LES BOUTONS ======= -->
-        <VBox alignment="CENTER" spacing="15">
+            <!-- Titre -->
+            <Label text="Espace Administrateur"
+                   style="-fx-font-size: 28px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #2b8af6;" />
 
-            <Button fx:id="btnDeclarations" onAction="#openDeclarations" prefHeight="55" prefWidth="320" style="-fx-background-color: #1a73e8; -fx-text-fill: white;                            -fx-font-size: 18px; -fx-font-weight: bold;                            -fx-background-radius: 12;" text="Afficher les Déclarations" />
+            <Label text="Sélectionnez une action"
+                   style="-fx-font-size: 17px; -fx-text-fill: #555;" />
 
-            <Button fx:id="btnEtudiants" onAction="#openEtudiants" prefHeight="55" prefWidth="320" style="-fx-background-color: #1a73e8; -fx-text-fill: white;                            -fx-font-size: 18px; -fx-font-weight: bold;                            -fx-background-radius: 12;" text="Liste des Étudiants" />
+            <!-- ===== BOUTONS ===== -->
+            <VBox spacing="20" alignment="CENTER">
 
-            <Button fx:id="btnEntreprises" onAction="#openEntreprises" prefHeight="55" prefWidth="320" style="-fx-background-color: #1a73e8; -fx-text-fill: white;                            -fx-font-size: 18px; -fx-font-weight: bold;                            -fx-background-radius: 12;" text="Liste des Entreprises" />
+                <Button fx:id="btnDeclarations"
+                        text="Afficher les Déclarations"
+                        onAction="#openDeclarations"
+                        prefWidth="350" prefHeight="55"
+                        style="-fx-background-color: linear-gradient(to right, #2b8af6, #6a5af9);
+                               -fx-text-fill: white;
+                               -fx-font-size: 18px;
+                               -fx-font-weight: bold;
+                               -fx-background-radius: 15;" />
+
+                <Button fx:id="btnEtudiants"
+                        text="Liste des Étudiants"
+                        onAction="#openEtudiants"
+                        prefWidth="350" prefHeight="55"
+                        style="-fx-background-color: linear-gradient(to right, #2b8af6, #6a5af9);
+                               -fx-text-fill: white;
+                               -fx-font-size: 18px;
+                               -fx-font-weight: bold;
+                               -fx-background-radius: 15;" />
+
+                <Button fx:id="btnEntreprises"
+                        text="Liste des Entreprises"
+                        onAction="#openEntreprises"
+                        prefWidth="350" prefHeight="55"
+                        style="-fx-background-color: linear-gradient(to right, #2b8af6, #6a5af9);
+                               -fx-text-fill: white;
+                               -fx-font-size: 18px;
+                               -fx-font-weight: bold;
+                               -fx-background-radius: 15;" />
+            </VBox>
 
         </VBox>
 
-    </VBox>
+    </children>
 
 </AnchorPane>

@@ -20,10 +20,10 @@
               layoutX="150" layoutY="40">
 
             <!-- LOGO TALENTWAVE -->
-            <ImageView fitHeight="90" preserveRatio="true">
+            <ImageView fitHeight="200" preserveRatio="true">
                 <image>
                     <!-- Mets ton image logo ici (dans resources) -->
-                    <Image url="@logo.png"/>
+                    <Image url="@logo2.png"/>
                 </image>
             </ImageView>
 
@@ -36,7 +36,7 @@
 
             <!-- CARD -->
             <VBox spacing="15" alignment="CENTER"
-                  prefWidth="420" prefHeight="320"
+                  prefWidth="250" prefHeight="200"
                   style="-fx-background-color: #F6F6F6;
                          -fx-background-radius: 25;
                          -fx-padding: 25;

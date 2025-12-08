@@ -34,15 +34,14 @@ public class ListeEntreprise {
         adresseCell.setCellValueFactory(new PropertyValueFactory<>("adresse"));
         tuteurCell.setCellValueFactory(new PropertyValueFactory<>("tuteur"));
         contactCell.setCellValueFactory(new PropertyValueFactory<>("contact"));
-
+        
         loadTableData();
     }
 
     private void loadTableData() {
 
-        // Charger toutes les entreprises
         ObservableList<Entreprise> list =
-                FXCollections.observableArrayList(entrepriseDAO.findAll());
+                FXCollections.observableArrayList(entrepriseDAO.findAllUsedByDeclarations());
 
         userTable.setItems(list);
     }

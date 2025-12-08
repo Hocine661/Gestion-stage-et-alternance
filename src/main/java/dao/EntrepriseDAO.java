@@ -122,4 +122,34 @@ public class EntrepriseDAO {
 
         return entreprises;
     }
+
+    public List<Entreprise> findAllUsedByDeclarations() {
+        List<Entreprise> entreprises = new ArrayList<>();
+
+        // Requête SQL utilisant JOIN ou un DISTINCT pour ne pas dupliquer les entreprises
+        String sql = "SELECT DISTINCT e.* FROM entreprise e "
+                + "JOIN declaration d ON e.idEntreprise = d.idEntreprise "
+                + "ORDER BY e.nom ASC";
+
+        try (Connection conn = dao.DatabaseConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
+
+            while (rs.next()) {
+                Entreprise e = new Entreprise();
+                // Mappage des champs (similaire à findById)
+                e.setIdEntreprise(rs.getInt("idEntreprise"));
+                e.setNom(rs.getString("nom"));
+                e.setAdresse(rs.getString("adresse"));
+                e.setTuteur(rs.getString("tuteur"));
+                e.setContact(rs.getString("contact"));
+
+                entreprises.add(e);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erreur DAO Entreprise (findAllUsedByDeclarations) : " + e.getMessage());
+        }
+        return entreprises;
+    }
 }

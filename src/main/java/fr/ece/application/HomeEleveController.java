@@ -1,5 +1,3 @@
-
-
 package fr.ece.application;
 
 import javafx.fxml.FXML;
@@ -13,6 +11,7 @@ import javafx.stage.Stage;
 import model.Declaration;
 import model.Entreprise;
 import model.Utilisateur;
+import services.DocumentService;
 import services.EntrepriseService;
 import services.ServiceDeclaration;
 import services.UserSession;
@@ -24,6 +23,7 @@ public class HomeEleveController {
 
     private final ServiceDeclaration serviceDeclaration = new ServiceDeclaration();
     private final EntrepriseService entrepriseService = new EntrepriseService();
+    private final DocumentService documentService = new DocumentService();
 
     @FXML
     private Hyperlink deconnexionButton;
@@ -53,6 +53,7 @@ public class HomeEleveController {
         Utilisateur currentUser = UserSession.getCurrentUser();
         String prenom = currentUser != null? currentUser.getPrenom(): "Etudiant";
         welcomeLabel.setText("Welcome " + prenom);
+
 
         docsList.getItems().setAll(
                 "Convention de stage — Manquante",

@@ -25,8 +25,7 @@ public class ServiceDeclaration {
     }
 
     public Declaration findActiveDeclarationByEleveId(int eleveId) {
-       return declarationDAO.findById(eleveId);
-
+        // ASSUREZ-VOUS que cette méthode appelle la méthode du DAO qui cherche par idUtilisateur
+        return declarationDAO.findActiveDeclarationByEleveId(eleveId);
     }
-
 }

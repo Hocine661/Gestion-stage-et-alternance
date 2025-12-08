@@ -43,7 +43,6 @@ public class DeclarationController {
     @FXML
     public void initialize() {
         if (typeField != null) {
-            typeField.getItems().addAll("Stage", "Alternance");
             typeField.getSelectionModel().selectFirst();
         }
     }

@@ -1,25 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="548.0" prefWidth="713.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ece.application.HomeController">
-   <children>
-      <Pane layoutX="28.0" layoutY="27.0" prefHeight="491.0" prefWidth="651.0" style="-fx-background-radius: 30; -fx-background-color: F6F6F6;">
-         <children>
-            <Button fx:id="inscriptionButtom" layoutX="542.0" layoutY="14.0" mnemonicParsing="false" onAction="#onInscriptionClick" style="-fx-background-color: rgba(43, 138, 246, 1); -fx-background-radius: 30;" text="Inscription" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-            <Button fx:id="connexionButtom" layoutX="453.0" layoutY="14.0" mnemonicParsing="false" onAction="#onConnexionClick" style="-fx-background-color: rgba(43, 138, 246, 1); -fx-background-radius: 30;" text="Connexion" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
-   </children>
+<AnchorPane prefWidth="800" prefHeight="500"
+            style="-fx-background-color: linear-gradient(to bottom, #0A1E45, #1F0F4D);"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="fr.ece.application.HomeController">
+
+    <children>
+
+        <!-- Conteneur central -->
+        <VBox spacing="20" alignment="CENTER"
+              layoutX="200" layoutY="60" prefWidth="400">
+            <padding>
+                <Insets top="40" bottom="40"/>
+            </padding>
+
+            <!-- LOGO TALENTWAVE -->
+            <ImageView fitWidth="180" preserveRatio="true">
+                <image>
+                    <Image url="@logo.png"/>
+                </image>
+            </ImageView>
+
+            <!-- TEXTE DE BIENVENUE -->
+            <Text text="Bienvenue sur TalentWave"
+                  fill="white">
+                <font>
+                    <Font name="System Bold" size="24"/>
+                </font>
+            </Text>
+
+            <Text text="Votre plateforme de gestion de stages et alternances"
+                  fill="#C7C7C7">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Text>
+
+            <!-- BOUTONS -->
+            <Button fx:id="connexionButtom"
+                    onAction="#onConnexionClick"
+                    prefWidth="250" prefHeight="40"
+                    text="Connexion"
+                    style="-fx-background-color: #2B8AF6; -fx-text-fill: white; -fx-background-radius: 20; -fx-font-size: 14;"/>
+
+            <Button fx:id="inscriptionButtom"
+                    onAction="#onInscriptionClick"
+                    prefWidth="250" prefHeight="40"
+                    text="Inscription"
+                    style="-fx-background-color: #7A3DF5; -fx-text-fill: white; -fx-background-radius: 20; -fx-font-size: 14;"/>
+
+        </VBox>
+
+    </children>
+
 </AnchorPane>

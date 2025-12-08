@@ -217,4 +217,5 @@ public class HomeEleveController {
             new Alert(Alert.AlertType.ERROR, "Erreur lors du chargement de la vue des commentaires.").showAndWait();
         }
     }
+    
 }

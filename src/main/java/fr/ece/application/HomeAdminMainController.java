@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import java.io.IOException;
 
 public class HomeAdminMainController {
 
@@ -25,7 +26,7 @@ public class HomeAdminMainController {
 
         btnDeclarations.setOnAction(e -> openPage("homeAdminDeclarations.fxml"));
         btnEtudiants.setOnAction(e -> openPage("listeEtudiants.fxml"));
-        btnEntreprises.setOnAction(e -> openPage("listeEntreprises.fxml"));
+        btnEntreprises.setOnAction(e -> openPage("AdminEntreprises.fxml"));
         btnCommentaires.setOnAction(e -> openPage("commentaire.fxml"));
 
         // Déconnexion
@@ -43,4 +44,34 @@ public class HomeAdminMainController {
             System.out.println("Erreur : " + ex.getMessage());
         }
     }
+    @FXML
+    private void openDeclarations() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/ece/application/declaration.fxml"));
+        Parent root = loader.load();
+        btnDeclarations.getScene().setRoot(root);
+    }
+
+    @FXML
+    private void openEtudiants() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/ece/application/listeUtilisateur.fxml"));
+        Parent root = loader.load();
+        btnEtudiants.getScene().setRoot(root);
+    }
+
+
+    @FXML
+    private void openEntreprises() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/ece/application/listeEntreprise.fxml"));
+        Parent root = loader.load();
+        btnEntreprises.getScene().setRoot(root);
+    }
+
+
+    @FXML
+    private void openCommentaires() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/ece/application/commentaire.fxml"));
+        Parent root = loader.load();
+        btnCommentaires.getScene().setRoot(root);
+    }
+
 }

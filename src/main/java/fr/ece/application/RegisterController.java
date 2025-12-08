@@ -45,12 +45,15 @@ public class RegisterController {
         String email = emailField.getText();
         String motDePasse = mdpField.getText();
 
-        // choix du role
         RadioButton selectedRadio = (RadioButton) roleGroup.getSelectedToggle();
-        String role = selectedRadio != null ?
-                (selectedRadio.getText().equalsIgnoreCase("Eleve") ? "eleve" : "admin") :
-                null;
-
+        // choix du role
+        String role = null;
+        if (selectedRadio == eleveRadio) {
+            role = "eleve";
+        } else if (selectedRadio == scolaritéRadio) {
+            // Nous conservons "admin" comme valeur pour le rôle 'scolarité' en BDD
+            role = "admin";
+        }
 
         if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || motDePasse.isEmpty() || role == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Veuillez remplir tous les champs et choisir un rôle.");

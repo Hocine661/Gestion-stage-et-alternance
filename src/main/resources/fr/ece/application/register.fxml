@@ -1,106 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="750.0"
-            style="-fx-background-color: white;"
-            xmlns="http://javafx.com/javafx/25"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="fr.ece.application.RegisterController">
+<AnchorPane prefHeight="600.0" prefWidth="750.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ece.application.RegisterController">
 
     <children>
 
         <!-- CONTENEUR PRINCIPAL CENTRÉ -->
-        <VBox alignment="CENTER" spacing="25"
-              layoutX="150" layoutY="20"
-              prefWidth="450">
+        <VBox alignment="CENTER" layoutX="150" layoutY="20" prefWidth="450" spacing="25">
 
             <!-- LOGO TALENTWAVE -->
-            <ImageView fitHeight="200" preserveRatio="true">
+            <ImageView fitHeight="174.0" fitWidth="200.0" preserveRatio="true">
                 <image>
                     <Image url="@logo2.png" />
                 </image>
             </ImageView>
 
             <!-- TITRE -->
-            <Label text="Créer un compte"
-                   textFill="#3e6296">
+            <Label prefHeight="21.0" prefWidth="204.0" text="Créer un compte" textFill="#3e6296">
                 <font>
                     <Font name="System Bold" size="26" />
                 </font>
             </Label>
 
             <!-- CARTE D’INSCRIPTION -->
-            <VBox spacing="5" alignment="CENTER_LEFT"
-                  prefWidth="420"
-                  style="-fx-background-color: #F6F6F6;
-                         -fx-background-radius: 25;
-                         -fx-padding: 25;
-                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0, 0, 2);">
+            <VBox alignment="CENTER_LEFT" prefHeight="299.0" prefWidth="450.0" spacing="5" style="-fx-background-color: #F6F6F6;                          -fx-background-radius: 25;                          -fx-padding: 25;                          -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0, 0, 2);">
 
                 <!-- Nom & Prénom -->
                 <HBox spacing="15">
                     <VBox spacing="5">
                         <Label text="Nom :" textFill="#3e4a70" />
-                        <TextField fx:id="nomField"
-                                   prefHeight="35" prefWidth="180"
-                                   style="-fx-background-radius: 10; -fx-background-color: white;" />
+                        <TextField fx:id="nomField" prefHeight="35" prefWidth="180" style="-fx-background-radius: 10; -fx-background-color: white;" />
                     </VBox>
 
                     <VBox spacing="5">
                         <Label text="Prénom :" textFill="#3e4a70" />
-                        <TextField fx:id="prenomField"
-                                   prefHeight="35" prefWidth="180"
-                                   style="-fx-background-radius: 10; -fx-background-color: white;" />
+                        <TextField fx:id="prenomField" prefHeight="35" prefWidth="180" style="-fx-background-radius: 10; -fx-background-color: white;" />
                     </VBox>
                 </HBox>
 
                 <!-- Email -->
                 <VBox spacing="5">
                     <Label text="Email :" textFill="#3e4a70" />
-                    <TextField fx:id="emailField"
-                               prefHeight="35" prefWidth="380"
-                               style="-fx-background-radius: 10; -fx-background-color: white;" />
+                    <TextField fx:id="emailField" prefHeight="35" prefWidth="380" style="-fx-background-radius: 10; -fx-background-color: white;" />
                 </VBox>
 
                 <!-- Mot de passe -->
                 <VBox spacing="5">
                     <Label text="Mot de passe :" textFill="#3e4a70" />
-                    <PasswordField fx:id="mdpField"
-                                   prefHeight="35" prefWidth="380"
-                                   style="-fx-background-radius: 10; -fx-background-color: white;" />
+                    <PasswordField fx:id="mdpField" prefHeight="35" prefWidth="380" style="-fx-background-radius: 10; -fx-background-color: white;" />
                 </VBox>
 
                 <!-- Rôle -->
                 <VBox spacing="5">
                     <Label text="Rôle :" textFill="#3e4a70" />
 
-                    <HBox spacing="60" alignment="CENTER_LEFT">
-                        <RadioButton fx:id="eleveRadio"
-                                     text="Élève" mnemonicParsing="false">
+                    <HBox alignment="CENTER_LEFT" spacing="60">
+                        <RadioButton fx:id="eleveRadio" mnemonicParsing="false" text="Élève">
                             <toggleGroup>
                                 <ToggleGroup fx:id="roleGroup" />
                             </toggleGroup>
                         </RadioButton>
 
-                        <RadioButton fx:id="scolaritéRadio"
-                                     text="Scolarité" mnemonicParsing="false"
-                                     toggleGroup="$roleGroup" />
+                        <RadioButton fx:id="scolaritéRadio" mnemonicParsing="false" text="Scolarité" toggleGroup="$roleGroup" />
                     </HBox>
                 </VBox>
 
                 <!-- BOUTON INSCRIPTION -->
                 <HBox alignment="CENTER">
-                    <Button fx:id="inscriptionButton"
-                            text="S'inscrire"
-                            onAction="#inscription"
-                            prefWidth="200" prefHeight="40"
-                            style="-fx-background-radius: 20;
-                                   -fx-background-color: linear-gradient(to right, #2b8af6, #6a5af9);
-                                   -fx-text-fill: white;">
+                    <Button fx:id="inscriptionButton" onAction="#inscription" prefHeight="40" prefWidth="200" style="-fx-background-radius: 20;                                    -fx-background-color: linear-gradient(to right, #2b8af6, #6a5af9);                                    -fx-text-fill: white;" text="S'inscrire">
                         <font>
                             <Font name="System Bold" size="14" />
                         </font>
@@ -112,4 +91,3 @@
 
     </children>
 </AnchorPane>
-

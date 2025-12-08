@@ -44,8 +44,7 @@ public class HomeEleveController {
     // Entreprise
     @FXML private Label companyName, companyAddress, companyTutor, companyContact;
 
-    // Commentaires
-    @FXML private ListView<String> commentsList;
+
 
 
     @FXML
@@ -70,7 +69,6 @@ public class HomeEleveController {
 
         Declaration declaration = serviceDeclaration.findActiveDeclarationByEleveId(currentUser.getIdUtilisateur());
         docsList.getItems().clear();
-        commentsList.getItems().clear();
         clearCompanyInfo();
 
         if (declaration != null) {
@@ -106,27 +104,42 @@ public class HomeEleveController {
     private void setStatus(String status, boolean hasDeclaration) {
         statusLabel.setText(status);
         boolean isDeclared = hasDeclaration;
+
         switch (status.toLowerCase()) {
             case "validé":
             case "valide":
+                // Dossier finalisé - AUCUNE action permise
                 isDeclared = true;
                 break;
+
             case "à corriger":
+                // L'élève doit éditer le dossier existant (utiliser le bouton Modifier)
+                isDeclared = true;
+                break;
+
             case "refusé":
             case "refuse":
-                isDeclared = true;
+                // Le dossier est clos par le refus. L'élève doit repartir de zéro.
+                // On force isDeclared à false pour réafficher le bouton Déclarer.
+                isDeclared = false; // <<< CORRECTION FONDAMENTALE ICI
                 break;
-            default:
-                statusLabel.setStyle("-fx-padding: 6 10; -fx-background-radius: 999;"
-                        + "-fx-background-color: #fff7e6; -fx-text-fill: #8a5a00; -fx-font-weight: 700;");
+
+            default: // 'En attente' ou 'Nouveau'
+                // ... (style code) ...
 
                 if (!hasDeclaration) {
-                    statusLabel.setText("Non déclarée"); // Afficher un statut clair pour le nouveau
+                    statusLabel.setText("Non déclarée");
+                    isDeclared = false; // Nécessite de déclarer
+                } else {
+                    statusLabel.setText("En attente"); // Nécessite de modifier/attendre
+                    isDeclared = true; // Montre le bouton Modifier/Attend l'Admin
                 }
                 break;
         }
-        declareBtn.setVisible(!isDeclared);
-        editDeclarationBtn.setVisible(isDeclared);
+
+        // Logique de visibilité
+        declareBtn.setVisible(!isDeclared); // Visible si Refusé ou Non déclarée
+        editDeclarationBtn.setVisible(isDeclared); // Visible si Validé, À corriger, ou En attente
     }
 
     // ===== Menu =====

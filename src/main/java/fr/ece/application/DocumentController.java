@@ -4,11 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -194,9 +197,25 @@ public class DocumentController {
     }
 
     private void handleDownload(Document document) {
-        // Logique de téléchargement du fichier
-        new Alert(Alert.AlertType.INFORMATION, "Fonctionnalité de téléchargement pour: " + document.getCheminFichier() + " (À implémenter!)").showAndWait();
-        // Vous devrez utiliser Desktop.getDesktop().open(new File(document.getCheminFichier())); ou une méthode de copie.
+        String filePath = document.getCheminFichier();
+        File fileToOpen = new File(filePath);
+
+        if (Desktop.isDesktopSupported() && fileToOpen.exists()) {
+            try {
+                // Utilise l'application par défaut du système pour ouvrir le fichier
+                Desktop.getDesktop().open(fileToOpen);
+                // Vous pouvez commenter l'alerte de succès si vous préférez une expérience plus fluide
+                // new Alert(Alert.AlertType.INFORMATION, "Ouverture du fichier : " + filePath).showAndWait();
+
+            } catch (IOException e) {
+                new Alert(Alert.AlertType.ERROR, "Erreur : Le système d'exploitation n'a pas pu ouvrir le fichier. Chemin non valide ou fichier manquant.").showAndWait();
+                e.printStackTrace();
+            }
+        } else if (!fileToOpen.exists()) {
+            new Alert(Alert.AlertType.ERROR, "Erreur : Fichier introuvable sur le disque. Chemin : " + filePath).showAndWait();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Erreur : La fonctionnalité Desktop n'est pas supportée par votre système.").showAndWait();
+        }
     }
 
     private void handleDelete(Document document) {

@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane style="-fx-font-family: 'Segoe UI', 'Roboto', 'Sans-Serif'; -fx-background-color: #f6f7fb;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ece.application.HomeEleveController">
+<BorderPane style="-fx-font-family: 'Segoe UI', 'Roboto', 'Sans-Serif'; -fx-background-color: #f6f7fb;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ece.application.HomeEleveController">
 
     <!-- ===== Header ===== -->
     <top>
@@ -19,23 +29,18 @@
 
                 <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: 600;" text="Gestion Stages et Alternance" />
 
-                <Pane HBox.hgrow="ALWAYS">
-               <children>
-                  <Button layoutX="80.0" layoutY="2.0" mnemonicParsing="false" style="-fx-background-radius: 30; -fx-background-color: red;" text="Supprimer" textFill="WHITE">
-                     <font>
-                        <Font size="13.0" />
-                     </font></Button>
-               </children></Pane>
-
-                <Hyperlink onAction="#goDeclarations" text="Mes déclarations" />
-                <Hyperlink fx:id="deconnexionButton" onAction="#logout" text="Déconnexion" />
+                <Pane HBox.hgrow="ALWAYS" />
+                <Hyperlink fx:id="deconnexionButton" onAction="#logout" text="Déconnexion" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Hyperlink>
             </children>
         </HBox>
     </top>
 
     <!-- ===== CONTENU ===== -->
     <center>
-        <VBox spacing="16">
+        <VBox prefHeight="514.0" prefWidth="713.0" spacing="16">
             <padding>
                 <Insets bottom="16" left="16" right="16" top="16" />
             </padding>
@@ -78,7 +83,6 @@
 
                             <HBox spacing="8">
                                 <Button fx:id="documentButton" onAction="#uploadDocument" text="Uploader" />
-                                <Button onAction="#openDocuments" text="Voir tous" />
                             </HBox>
 
                         </VBox>
@@ -86,7 +90,7 @@
 
                     <!-- Entreprise -->
                     <StackPane style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                        <VBox spacing="6">
+                        <VBox prefHeight="163.0" prefWidth="305.0" spacing="6">
 
                             <Label style="-fx-font-size: 15px; -fx-font-weight: 700;" text="Mon entreprise d'accueil" />
 
@@ -117,17 +121,14 @@
                         </rowConstraints>
                             </GridPane>
 
-                            <HBox spacing="8">
-                                <Button onAction="#editCompany" text="Modifier" />
-                                <Button onAction="#openCompany" text="Détails" />
-                            </HBox>
+                            <HBox spacing="8" />
 
                         </VBox>
                     </StackPane>
 
                     <!-- Commentaires -->
                     <StackPane style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                        <VBox spacing="8">
+                        <VBox prefHeight="137.0" prefWidth="304.0" spacing="8">
                             <Label style="-fx-font-size: 15px; -fx-font-weight: 700;" text="Commentaires / Suivi" />
 
                             <ListView fx:id="commentsList" prefHeight="140" />

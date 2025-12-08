@@ -3,6 +3,9 @@ package dao;
 import model.Declaration;
 
 import java.sql.*;
+import model.DeclarationView;
+import java.util.List;
+import java.util.ArrayList;
 
 public class DeclarationDAO {
 
@@ -53,36 +56,37 @@ public class DeclarationDAO {
             return false;
         }
     }
+    public List<DeclarationView> findAllForAdmin() {
+        List<DeclarationView> list = new ArrayList<>();
 
-    public Declaration findActiveDeclarationByEleveId(int idUtilisateur) {
-        // Requête pour sélectionner la dernière déclaration insérée pour cet utilisateur.
-        String sql = "SELECT * FROM declaration WHERE idUtilisateur = ? ORDER BY idDeclaration DESC LIMIT 1";
+        String sql = "SELECT d.date_debut, d.date_fin, d.type, d.statut, "
+                + "u.email AS userEmail, "
+                + "e.nomEntreprise AS entreprise "
+                + "FROM declaration d "
+                + "JOIN utilisateur u ON d.idUtilisateur = u.idUtilisateur "
+                + "JOIN entreprise e ON d.idEntreprise = e.idEntreprise";
 
         try (Connection conn = dao.DatabaseConnection.getConnection();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
+             PreparedStatement pst = conn.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
 
-            pst.setInt(1, idUtilisateur);
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                Declaration d = new Declaration();
-                // Mappage de TOUS les champs (comme dans findById)
-                d.setIdDeclaration(rs.getInt("idDeclaration"));
-                d.setDateDebut(rs.getDate("date_debut").toLocalDate());
-                d.setDateFin(rs.getDate("date_fin").toLocalDate());
-                d.setType(rs.getString("type"));
-                d.setMission(rs.getString("mission"));
-                d.setStatut(rs.getString("statut"));
-                d.setIdUtilisateur(rs.getInt("idUtilisateur"));
-                d.setIdEntreprise(rs.getInt("idEntreprise"));
-                return d;
+            while (rs.next()) {
+                DeclarationView v = new DeclarationView(
+                        rs.getString("userEmail"),
+                        rs.getString("entreprise"),
+                        rs.getDate("date_debut").toLocalDate(),
+                        rs.getDate("date_fin").toLocalDate(),
+                        rs.getString("type"),
+                        rs.getString("statut")
+                );
+                list.add(v);
             }
 
         } catch (Exception e) {
-            System.out.println("Erreur DAO Declaration (findActiveDeclarationByEleveId) : " + e.getMessage());
+            System.out.println("Erreur findAllForAdmin : " + e.getMessage());
         }
 
-        return null;
+        return list;
     }
 }
 

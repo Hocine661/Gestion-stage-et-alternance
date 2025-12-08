@@ -16,21 +16,14 @@ public class HomeAdminMainController {
     @FXML private Button btnEntreprises;
     @FXML private Button btnCommentaires;
     @FXML private Button btnLogout;
+    @FXML private Button btnUtilisateurs; // nouveau bouton
     @FXML private Label adminNameLabel;
-
-
 
     @FXML
     public void initialize() {
-
         // Affichage du nom admin
         adminNameLabel.setText("Admin : " + CurrentUser.fullName);
-
-
-
-
     }
-
 
     @FXML
     private void openDeclarations() throws IOException {
@@ -46,7 +39,6 @@ public class HomeAdminMainController {
         btnEtudiants.getScene().setRoot(root);
     }
 
-
     @FXML
     private void openEntreprises() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/ece/application/listeEntreprise.fxml"));
@@ -54,12 +46,19 @@ public class HomeAdminMainController {
         btnEntreprises.getScene().setRoot(root);
     }
 
-
     @FXML
     private void openCommentaires() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/ece/application/commentaire.fxml"));
         Parent root = loader.load();
         btnCommentaires.getScene().setRoot(root);
+    }
+
+    // ✅ NOUVELLE MÉTHODE POUR LE BOUTON LISTEUTILISATEUR
+    @FXML
+    private void openUtilisateurs() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/ece/application/listeUtilisateur.fxml"));
+        Parent root = loader.load();
+        btnUtilisateurs.getScene().setRoot(root);
     }
 
 }

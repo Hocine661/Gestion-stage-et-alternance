@@ -88,6 +88,17 @@
                            -fx-font-size: 18px; -fx-font-weight: bold;
                            -fx-background-radius: 12;"
                     text="Ajouter un Commentaire" />
+
+            <!-- NOUVEAU BOUTON POUR LISTEUTILISATEUR -->
+            <Button fx:id="btnUtilisateurs"
+                    onAction="#openUtilisateurs"
+                    prefHeight="55"
+                    prefWidth="320"
+                    style="-fx-background-color: #1a73e8; -fx-text-fill: white;
+                           -fx-font-size: 18px; -fx-font-weight: bold;
+                           -fx-background-radius: 12;"
+                    text="Liste des Utilisateurs" />
+
         </VBox>
 
     </VBox>

@@ -37,6 +37,7 @@ public class LoginController {
 
         if (utilisateur != null) {
             UserSession.login(utilisateur);
+            CurrentUser.fullName = utilisateur.getNom() + " " + utilisateur.getPrenom();
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Connexion réussie ! Bienvenue " + utilisateur.getPrenom() + ".");
             alert.showAndWait();
@@ -53,7 +54,7 @@ public class LoginController {
         if ("eleve".equalsIgnoreCase(role)) {
             fxmlFile = "homeEleve.fxml";
         } else if ("admin".equalsIgnoreCase(role)) {
-            fxmlFile = "homeAdmin.fxml";
+            fxmlFile = "homeAdminMain.fxml";
         } else {
             return;
         }

@@ -3,7 +3,9 @@ package dao;
 import model.Declaration;
 
 import java.sql.*;
+
 import model.DeclarationView;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -56,6 +58,7 @@ public class DeclarationDAO {
             return false;
         }
     }
+
     public List<DeclarationView> findAllForAdmin() {
         List<DeclarationView> list = new ArrayList<>();
 
@@ -120,6 +123,7 @@ public class DeclarationDAO {
         }
         return null;
     }
+
     public void addComment(int idDeclaration, String comment) {
         String sql = "UPDATE declaration SET commentaire = ? WHERE idDeclaration = ?";
 
@@ -134,6 +138,7 @@ public class DeclarationDAO {
             e.printStackTrace();
         }
     }
+
     public void updateStatut(int idDeclaration, String statut) {
         String sql = "UPDATE declaration SET statut = ? WHERE idDeclaration = ?";
 

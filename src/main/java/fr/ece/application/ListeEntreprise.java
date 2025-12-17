@@ -1,4 +1,5 @@
 package fr.ece.application;
+// page résevé a l'admin pour voir toutes les entreprises enregistrés
 
 import dao.EntrepriseDAO;
 import javafx.collections.FXCollections;
@@ -30,13 +31,10 @@ public class ListeEntreprise {
 
     @FXML
     public void initialize() {
-        // Associer les colonnes aux propriétés de la classe Entreprise
         nomCell.setCellValueFactory(new PropertyValueFactory<>("nom"));
         adresseCell.setCellValueFactory(new PropertyValueFactory<>("adresse"));
         tuteurCell.setCellValueFactory(new PropertyValueFactory<>("tuteur"));
         contactCell.setCellValueFactory(new PropertyValueFactory<>("contact"));
-
-        // Charger les données de la base
         loadTableData();
     }
 
@@ -45,8 +43,6 @@ public class ListeEntreprise {
             ObservableList<Entreprise> list =
                     FXCollections.observableArrayList(entrepriseDAO.findAll());
             userTable.setItems(list);
-
-            // DEBUG : vérifier que les entreprises sont bien chargées
             list.forEach(e -> System.out.println("Entreprise chargée : " + e.getNom()));
 
         } catch (Exception e) {

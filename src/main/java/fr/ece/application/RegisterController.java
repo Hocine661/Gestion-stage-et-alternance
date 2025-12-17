@@ -35,7 +35,7 @@ public class RegisterController {
     @FXML
     private ToggleGroup roleGroup;
 
-    private final SecuriteEtService securiteService =  new SecuriteEtService();
+    private final SecuriteEtService securiteService = new SecuriteEtService();
 
 
     @FXML
@@ -46,12 +46,10 @@ public class RegisterController {
         String motDePasse = mdpField.getText();
 
         RadioButton selectedRadio = (RadioButton) roleGroup.getSelectedToggle();
-        // choix du role
         String role = null;
         if (selectedRadio == eleveRadio) {
             role = "eleve";
         } else if (selectedRadio == scolaritéRadio) {
-            // Nous conservons "admin" comme valeur pour le rôle 'scolarité' en BDD
             role = "admin";
         }
 

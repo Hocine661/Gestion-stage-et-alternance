@@ -13,44 +13,38 @@
 
     <children>
 
-        <!-- LOGO TALENTWAVE -->
         <ImageView layoutX="20" layoutY="15" fitHeight="60" preserveRatio="true">
             <image>
                 <Image url="@logo.png"/>
             </image>
         </ImageView>
 
-        <!-- TITRE -->
         <Label layoutX="100" layoutY="25"
                text="Liste des Déclarations"
-               style="-fx-font-size: 28px; -fx-text-fill: #3e4a70; -fx-font-weight: bold;" />
+               style="-fx-font-size: 28px; -fx-text-fill: #3e4a70; -fx-font-weight: bold;"/>
 
-        <!-- CARD AUTOUR DU TABLEAU -->
         <VBox layoutX="20" layoutY="90" spacing="10"
               prefWidth="860" prefHeight="450"
               style="-fx-background-color: #F6F6F6;
                      -fx-background-radius: 20;
                      -fx-padding: 20;
                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0, 0, 2);">
-
-            <!-- TABLEAU -->
             <TableView fx:id="tableView" prefHeight="390" prefWidth="820">
 
                 <columns>
-                    <TableColumn fx:id="emailCol" prefWidth="150" text="Email" />
-                    <TableColumn fx:id="entrepriseCol" prefWidth="140" text="Entreprise" />
-                    <TableColumn fx:id="dateDebutCol" prefWidth="120" text="Date début" />
-                    <TableColumn fx:id="dateFinCol" prefWidth="120" text="Date fin" />
-                    <TableColumn fx:id="typeCol" prefWidth="100" text="Type" />
-                    <TableColumn fx:id="statutCol" prefWidth="120" text="Statut" />
-                    <TableColumn fx:id="commentaireCol" prefWidth="110" text="Commentaire" />
+                    <TableColumn fx:id="emailCol" prefWidth="150" text="Email"/>
+                    <TableColumn fx:id="entrepriseCol" prefWidth="140" text="Entreprise"/>
+                    <TableColumn fx:id="dateDebutCol" prefWidth="120" text="Date début"/>
+                    <TableColumn fx:id="dateFinCol" prefWidth="120" text="Date fin"/>
+                    <TableColumn fx:id="typeCol" prefWidth="100" text="Type"/>
+                    <TableColumn fx:id="statutCol" prefWidth="120" text="Statut"/>
+                    <TableColumn fx:id="commentaireCol" prefWidth="110" text="Commentaire"/>
                 </columns>
 
             </TableView>
 
         </VBox>
 
-        <!-- BOUTON FERMER -->
         <Button layoutX="760" layoutY="560"
                 prefWidth="120" prefHeight="35"
                 text="Fermer"
@@ -58,7 +52,7 @@
                 style="-fx-background-radius: 20;
                        -fx-background-color: linear-gradient(to right, #2b8af6, #6a5af9);
                        -fx-text-fill: white;
-                       -fx-font-size: 14px;" />
+                       -fx-font-size: 14px;"/>
 
     </children>
 

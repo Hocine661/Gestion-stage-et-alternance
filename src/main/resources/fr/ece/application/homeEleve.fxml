@@ -15,138 +15,151 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane style="-fx-font-family: 'Segoe UI', 'Roboto', 'Sans-Serif'; -fx-background-color: #f6f7fb;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ece.application.HomeEleveController">
+<BorderPane style="-fx-font-family: 'Segoe UI', 'Roboto', 'Sans-Serif'; -fx-background-color: #f6f7fb;"
+            xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="fr.ece.application.HomeEleveController">
 
-    <!-- ===== Header ===== -->
     <top>
         <HBox spacing="16" style="-fx-background-color: #214cbd;" BorderPane.alignment="CENTER_LEFT">
             <padding>
-                <Insets bottom="10" left="16" right="16" top="10" />
+                <Insets bottom="10" left="16" right="16" top="10"/>
             </padding>
 
             <children>
-                <!-- Image supprimée -->
 
-                <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: 600;" text="Gestion Stages et Alternance" />
 
-                <Pane HBox.hgrow="ALWAYS" />
+                <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: 600;"
+                       text="Gestion Stages et Alternance"/>
+
+                <Pane HBox.hgrow="ALWAYS"/>
                 <Hyperlink fx:id="deconnexionButton" onAction="#logout" text="Déconnexion" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Hyperlink>
+                    <font>
+                        <Font name="System Bold" size="12.0"/>
+                    </font>
+                </Hyperlink>
             </children>
         </HBox>
     </top>
 
-    <!-- ===== CONTENU ===== -->
     <center>
         <VBox prefHeight="514.0" prefWidth="713.0" spacing="16">
             <padding>
-                <Insets bottom="16" left="16" right="16" top="16" />
+                <Insets bottom="16" left="16" right="16" top="16"/>
             </padding>
 
             <children>
 
-                <!-- Bienvenue -->
-                <Label fx:id="welcomeLabel" style="-fx-font-size: 26px; -fx-font-weight: 700; -fx-text-fill: #111827;" text="Bienvenue, Étudiant !" />
+                <Label fx:id="welcomeLabel" style="-fx-font-size: 26px; -fx-font-weight: 700; -fx-text-fill: #111827;"
+                       text="Bienvenue, Étudiant !"/>
 
-                <!-- Grille 2 x 2 -->
                 <GridPane hgap="16" vgap="16">
                     <columnConstraints>
-                        <ColumnConstraints percentWidth="50" />
-                        <ColumnConstraints percentWidth="50" />
+                        <ColumnConstraints percentWidth="50"/>
+                        <ColumnConstraints percentWidth="50"/>
                     </columnConstraints>
 
-                    <!-- Statut -->
-                    <StackPane style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <StackPane style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;"
+                               GridPane.columnIndex="0" GridPane.rowIndex="0">
                         <VBox spacing="8">
 
-                            <Label style="-fx-font-size: 15px; -fx-font-weight: 700;" text="Statut de ma déclaration" />
+                            <Label style="-fx-font-size: 15px; -fx-font-weight: 700;" text="Statut de ma déclaration"/>
 
-                            <Label fx:id="statusLabel" prefHeight="32.0" prefWidth="100.0" style="-fx-padding: 6 10; -fx-background-radius: 999;                                           -fx-background-color: #fff7e6; -fx-text-fill: #8a5a00;                                           -fx-font-weight: 700;" text="En attente">
-                        <font>
-                           <Font size="15.0" />
-                        </font></Label>
+                            <Label fx:id="statusLabel" prefHeight="32.0" prefWidth="100.0"
+                                   style="-fx-padding: 6 10; -fx-background-radius: 999;                                           -fx-background-color: #fff7e6; -fx-text-fill: #8a5a00;                                           -fx-font-weight: 700;"
+                                   text="En attente">
+                                <font>
+                                    <Font size="15.0"/>
+                                </font>
+                            </Label>
 
-                            <HBox spacing="8" />
-                             <Button fx:id="declareBtn" onAction="#declareInternship" prefHeight="28.0" prefWidth="119.0" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to right, #2b8af6, #6a5af9);" text="Déclarer un stage" textFill="WHITE">
-                        <font>
-                           <Font name="System Bold" size="12.0" />
-                        </font>
-                     </Button>
+                            <HBox spacing="8"/>
+                            <Button fx:id="declareBtn" onAction="#declareInternship" prefHeight="28.0" prefWidth="119.0"
+                                    style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to right, #2b8af6, #6a5af9);"
+                                    text="Déclarer un stage" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="12.0"/>
+                                </font>
+                            </Button>
 
                         </VBox>
                     </StackPane>
 
-                    <!-- Documents -->
-                    <StackPane style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <StackPane style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;"
+                               GridPane.columnIndex="1" GridPane.rowIndex="0">
                         <VBox spacing="8">
 
-                            <Label style="-fx-font-size: 15px; -fx-font-weight: 700;" text="Documents obligatoires" />
+                            <Label style="-fx-font-size: 15px; -fx-font-weight: 700;" text="Documents obligatoires"/>
 
-                            <ListView fx:id="docsList" prefHeight="133.0" prefWidth="304.0" />
-                             <Button fx:id="documentButton" onAction="#uploadDocument" prefHeight="21.0" prefWidth="87.0" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to right, #2b8af6, #6a5af9);" text="Uploader" textFill="WHITE">
-                        <font>
-                           <Font name="System Bold" size="14.0" />
-                        </font>
-                     </Button>
+                            <ListView fx:id="docsList" prefHeight="133.0" prefWidth="304.0"/>
+                            <Button fx:id="documentButton" onAction="#uploadDocument" prefHeight="21.0" prefWidth="87.0"
+                                    style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to right, #2b8af6, #6a5af9);"
+                                    text="Uploader" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="14.0"/>
+                                </font>
+                            </Button>
 
-                            <HBox spacing="8" />
+                            <HBox spacing="8"/>
 
                         </VBox>
                     </StackPane>
 
-                    <!-- Entreprise -->
-                    <StackPane style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <StackPane style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;"
+                               GridPane.columnIndex="0" GridPane.rowIndex="1">
                         <VBox prefHeight="163.0" prefWidth="305.0" spacing="6">
 
-                            <Label style="-fx-font-size: 15px; -fx-font-weight: 700;" text="Mon entreprise d'accueil" />
+                            <Label style="-fx-font-size: 15px; -fx-font-weight: 700;" text="Mon entreprise d'accueil"/>
 
                             <GridPane hgap="8" vgap="6">
                                 <columnConstraints>
-                                    <ColumnConstraints minWidth="100" />
-                                    <ColumnConstraints hgrow="ALWAYS" />
+                                    <ColumnConstraints minWidth="100"/>
+                                    <ColumnConstraints hgrow="ALWAYS"/>
                                 </columnConstraints>
 
                                 <children>
-                                    <Label text="Nom :" />
-                                    <Label fx:id="companyName" text="—" GridPane.columnIndex="1" />
+                                    <Label text="Nom :"/>
+                                    <Label fx:id="companyName" text="—" GridPane.columnIndex="1"/>
 
-                                    <Label text="Adresse :" GridPane.rowIndex="1" />
-                                    <Label fx:id="companyAddress" text="—" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="Adresse :" GridPane.rowIndex="1"/>
+                                    <Label fx:id="companyAddress" text="—" GridPane.columnIndex="1"
+                                           GridPane.rowIndex="1"/>
 
-                                    <Label text="Tuteur :" GridPane.rowIndex="2" />
-                                    <Label fx:id="companyTutor" text="—" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label text="Tuteur :" GridPane.rowIndex="2"/>
+                                    <Label fx:id="companyTutor" text="—" GridPane.columnIndex="1"
+                                           GridPane.rowIndex="2"/>
 
-                                    <Label text="Contact :" GridPane.rowIndex="3" />
-                                    <Label fx:id="companyContact" text="—" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label text="Contact :" GridPane.rowIndex="3"/>
+                                    <Label fx:id="companyContact" text="—" GridPane.columnIndex="1"
+                                           GridPane.rowIndex="3"/>
                                 </children>
-                        <rowConstraints>
-                           <RowConstraints />
-                           <RowConstraints />
-                           <RowConstraints />
-                           <RowConstraints />
-                        </rowConstraints>
+                                <rowConstraints>
+                                    <RowConstraints/>
+                                    <RowConstraints/>
+                                    <RowConstraints/>
+                                    <RowConstraints/>
+                                </rowConstraints>
                             </GridPane>
 
-                            <HBox spacing="8" />
+                            <HBox spacing="8"/>
 
                         </VBox>
                     </StackPane>
 
-                    <!-- Commentaires -->
-                    <StackPane style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+
+                    <StackPane style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;"
+                               GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <VBox prefHeight="137.0" prefWidth="304.0" spacing="8">
-                            <Label style="-fx-font-size: 15px; -fx-font-weight: 700;" text="Commentaires / Suivi" />
+                            <Label style="-fx-font-size: 15px; -fx-font-weight: 700;" text="Commentaires / Suivi"/>
 
-                            <Hyperlink onAction="#openCommentsHistory" text="Voir le commentaire laissé par l'administrateur" />
+                            <Hyperlink onAction="#openCommentsHistory"
+                                       text="Voir le commentaire laissé par l'administrateur"/>
                         </VBox>
 
                     </StackPane>
-               <rowConstraints>
-                  <RowConstraints />
-                  <RowConstraints />
-               </rowConstraints>
+                    <rowConstraints>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                    </rowConstraints>
 
                 </GridPane>
 

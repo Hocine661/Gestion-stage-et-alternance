@@ -12,9 +12,8 @@ public class DeclarationView {
     private String type;
     private String statut;
 
-    // 🔥 Nouveau constructeur avec ID
-    public DeclarationView(int idDeclaration, String email, String entreprise,
-                           LocalDate dateDebut, LocalDate dateFin, String type, String statut) {
+    // Nouveau constructeur avec ID
+    public DeclarationView(int idDeclaration, String email, String entreprise, LocalDate dateDebut, LocalDate dateFin, String type, String statut) {
         this.idDeclaration = idDeclaration;
         this.email = email;
         this.entreprise = entreprise;

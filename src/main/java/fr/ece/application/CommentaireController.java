@@ -2,6 +2,7 @@ package fr.ece.application;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -31,8 +32,6 @@ public class CommentaireController {
 
     @FXML
     public void initialize() {
-
-        // RÉCUPÉRATION DE LA SESSION AU BON MOMENT
         currentUser = UserSession.getCurrentUser();
 
         if (currentUser == null) {
@@ -42,18 +41,14 @@ public class CommentaireController {
 
         roleUtilisateur = currentUser.getRole();
         nomAuteur = currentUser.getPrenom() + " " + currentUser.getNom();
-
-        // Par défaut, tout est désactivé
         commentaireArea.setDisable(true);
         btnSave.setDisable(true);
 
         updateViewAccess();
-
-        // Pour debug / visibilité du rôle
+        // affiche le role le nom l'utilisateur connecté
         labelAdmin.setText("Connecté en tant que : " + roleUtilisateur);
     }
 
-    // Reçoit la déclaration sélectionnée
     public void setDeclarationContext(Declaration declaration) {
         if (declaration != null) {
             this.declarationId = declaration.getIdDeclaration();
@@ -64,7 +59,7 @@ public class CommentaireController {
         }
     }
 
-    // Active ou désactive la zone d'édition selon le rôle
+    // active ou non la zone d'écriture selon le role de l'utilisateur connecter
     private void updateViewAccess() {
 
         boolean isAdmin = "admin".equalsIgnoreCase(roleUtilisateur)
@@ -81,7 +76,6 @@ public class CommentaireController {
         boolean isAdmin = "admin".equalsIgnoreCase(roleUtilisateur)
                 || "scolarité".equalsIgnoreCase(roleUtilisateur);
 
-        // Sécurité côté BACK-END
         if (!isAdmin) {
             showAlert(Alert.AlertType.ERROR, "Accès refusé",
                     "Seul un administrateur peut ajouter un commentaire.");
@@ -101,20 +95,18 @@ public class CommentaireController {
         try (Connection conn = DatabaseConnection.getConnection()) {
 
             String sql = """
-            INSERT INTO commentaire (contenu, date, auteur, idDeclaration)
-            VALUES (?, ?, ?, ?)
-            ON DUPLICATE KEY UPDATE contenu = ?, date = ?, auteur = ?
-            """;
+                    INSERT INTO commentaire (contenu, date, auteur, idDeclaration)
+                    VALUES (?, ?, ?, ?)
+                    ON DUPLICATE KEY UPDATE contenu = ?, date = ?, auteur = ?
+                    """;
 
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            // INSERT
             ps.setString(1, commentaireArea.getText());
             ps.setDate(2, Date.valueOf(LocalDate.now()));
             ps.setString(3, nomAuteur);
             ps.setInt(4, declarationId);
 
-            // UPDATE
             ps.setString(5, commentaireArea.getText());
             ps.setDate(6, Date.valueOf(LocalDate.now()));
             ps.setString(7, nomAuteur);
@@ -133,7 +125,7 @@ public class CommentaireController {
         }
     }
 
-    // Charge les commentaires existants (pour l'étudiant)
+    // Fait apparaiter le commentaire d'un élève
     private void chargerCommentaire() {
 
         if (declarationId <= 0) return;
@@ -150,7 +142,6 @@ public class CommentaireController {
             if (rs.next()) {
                 commentaireAffiche.setText(rs.getString("contenu"));
 
-                // Si admin, on met dans l’éditeur aussi
                 if (!commentaireArea.isDisable()) {
                     commentaireArea.setText(rs.getString("contenu"));
                 }
@@ -163,7 +154,7 @@ public class CommentaireController {
         }
     }
 
-    // Méthode utilitaire pour afficher des messages
+    // méthode pour faire apparaitre les fenetres d'alertes
     private void showAlert(Alert.AlertType type, String titre, String msg) {
         Alert alert = new Alert(type);
         alert.setTitle(titre);

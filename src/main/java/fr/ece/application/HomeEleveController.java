@@ -27,23 +27,20 @@ public class HomeEleveController {
 
     @FXML
     private Hyperlink deconnexionButton;
-
-    @FXML private ImageView logoView;
-    @FXML private Label welcomeLabel;
-
-    // Statut
-    @FXML private Label statusLabel;
-    @FXML private Button declareBtn;
-
-    // Documents
-    @FXML private ListView<String> docsList;
+    @FXML
+    private ImageView logoView;
+    @FXML
+    private Label welcomeLabel;
+    @FXML
+    private Label statusLabel;
+    @FXML
+    private Button declareBtn;
+    @FXML
+    private ListView<String> docsList;
     @FXML
     private Button documentButton;
-
-    // Entreprise
-    @FXML private Label companyName, companyAddress, companyTutor, companyContact;
-
-
+    @FXML
+    private Label companyName, companyAddress, companyTutor, companyContact;
 
 
     @FXML
@@ -53,18 +50,14 @@ public class HomeEleveController {
         if (currentUser == null || currentUser.getIdUtilisateur() <= 0) {
             welcomeLabel.setText("ERREUR: Utilisateur non chargé.");
             setStatus("ERREUR", false);
-            return; // Arrêter l'initialisation pour éviter le plantage
+            return;
         }
 
 
-        String prenom = currentUser != null? currentUser.getPrenom(): "Etudiant";
+        String prenom = currentUser != null ? currentUser.getPrenom() : "Etudiant";
         welcomeLabel.setText("Welcome " + prenom);
 
 
-        docsList.getItems().setAll(
-                "Convention de stage — Manquante",
-                "Attestation — Déposée (12/10/2025)"
-        );
 
         Declaration declaration = serviceDeclaration.findActiveDeclarationByEleveId(currentUser.getIdUtilisateur());
         docsList.getItems().clear();
@@ -81,10 +74,10 @@ public class HomeEleveController {
                 companyContact.setText(entreprise.getContact());
             }
 
-            // Ajouter la base pour celui la
+
+            // trouver le probleme et la connecter à la base de données, pour afficher les noms des documents enregistrer par l'éleve
             docsList.getItems().setAll(
-                    "Convention de stage — Déposée (via BDD)",
-                    "Attestation — Manquante"
+
             );
 
         } else {
@@ -92,7 +85,7 @@ public class HomeEleveController {
         }
     }
 
-   //Effacer les champs si plus nécissaires, par exemple refusé
+    // nettoyer les champ aprés changement de statut en refus, ou connexion avec un compte éleve qui n'a pas encore fait sa declaration
     private void clearCompanyInfo() {
         companyName.setText("—");
         companyAddress.setText("—");
@@ -107,45 +100,37 @@ public class HomeEleveController {
         switch (status.toLowerCase()) {
             case "validé":
             case "valide":
-                // Dossier finalisé - AUCUNE action permise
                 isDeclared = true;
                 break;
 
             case "à corriger":
-                // L'élève doit éditer le dossier existant (utiliser le bouton Modifier)
                 isDeclared = true;
                 break;
 
             case "refusé":
             case "refuse":
-                // Le dossier est clos par le refus. L'élève doit repartir de zéro.
-                // On force isDeclared à false pour réafficher le bouton Déclarer.
-                isDeclared = false; // <<< CORRECTION FONDAMENTALE ICI
+                isDeclared = false;
                 break;
 
-            default: // 'En attente' ou 'Nouveau'
-                // ... (style code) ...
+            default:
 
                 if (!hasDeclaration) {
                     statusLabel.setText("Non déclarée");
-                    isDeclared = false; // Nécessite de déclarer
+                    isDeclared = false;
                 } else {
-                    statusLabel.setText("En attente"); // Nécessite de modifier/attendre
-                    isDeclared = true; // Montre le bouton Modifier/Attend l'Admin
+                    statusLabel.setText("En attente");
+                    isDeclared = true;
                 }
                 break;
         }
 
-        // Logique de visibilité
-        declareBtn.setVisible(!isDeclared); // Visible si Refusé ou Non déclarée
+
+        declareBtn.setVisible(!isDeclared);
     }
 
-    // ===== Menu =====
-    @FXML private void goDashboard()    { /* déjà ici */ }
-    @FXML private void goDeclarations() { /* TODO: ouvrir vue déclarations */ }
-    @FXML private void goDocuments()    { /* TODO: ouvrir module documents */ }
-    @FXML private void goProfile()      { /* TODO: ouvrir vue profil */ }
-    @FXML private void logout()         {
+    // méthode des tache pouvant etre effectuer sur la page homeelele
+    @FXML
+    private void logout() {
         Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION, "Veillez confirmer que vous souhaitez vous déconnecter !", ButtonType.YES, ButtonType.NO);
         confirmation.showAndWait();
         if (confirmation.getResult() == ButtonType.YES) {
@@ -163,8 +148,9 @@ public class HomeEleveController {
         }
     }
 
-    // ===== Actions =====
-    @FXML private void declareInternship() {
+
+    @FXML
+    private void declareInternship() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("declaration.fxml")); // Utilisez le nom exact de votre fichier FXML
             Parent root = loader.load();
@@ -182,28 +168,29 @@ public class HomeEleveController {
             new Alert(Alert.AlertType.ERROR, "Erreur : Impossible d'ouvrir le formulaire de déclaration (Vérifiez le nom du fichier FXML).").showAndWait();
         }
     }
-    @FXML private void editInternship()    { /* TODO: ouvrir formulaire en édition */ }
-    @FXML private void uploadDocument()    {
-        try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("document.fxml")); // Utilisez le nom exact de votre fichier FXML
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setTitle("Déclaration de Stage / Alternance");
-        Stage currentStage = (Stage) documentButton.getScene().getWindow();
-        stage.initOwner(currentStage);
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
-        initialize();
 
-    } catch (IOException e) {
-        e.printStackTrace();
-        new Alert(Alert.AlertType.ERROR, "Erreur : Impossible d'ouvrir le formulaire de déclaration (Vérifiez le nom du fichier FXML).").showAndWait();
-    } }
-    @FXML private void openDocuments()     { /* TODO: naviguer vers documents */ }
-    @FXML private void editCompany()       { /* TODO: éditer entreprise */ }
-    @FXML private void openCompany()       { /* TODO: détails entreprise */ }
-    @FXML private void openCommentsHistory(){
+    @FXML
+    private void uploadDocument() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("document.fxml")); // Utilisez le nom exact de votre fichier FXML
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Déclaration de Stage / Alternance");
+            Stage currentStage = (Stage) documentButton.getScene().getWindow();
+            stage.initOwner(currentStage);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            initialize();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Erreur : Impossible d'ouvrir le formulaire de déclaration (Vérifiez le nom du fichier FXML).").showAndWait();
+        }
+    }
+
+    @FXML
+    private void openCommentsHistory() {
         Declaration activeDeclaration = serviceDeclaration.findActiveDeclarationByEleveId(UserSession.getCurrentUser().getIdUtilisateur());
         if (activeDeclaration == null) {
             new Alert(Alert.AlertType.WARNING, "Veuillez d'abord déclarer un stage/alternance.").showAndWait();
@@ -213,8 +200,6 @@ public class HomeEleveController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("commentaire.fxml"));
             Parent root = loader.load();
-
-            // ÉTAPE CRUCIALE : Injecter le contexte de la déclaration
             CommentaireController controller = loader.getController();
             controller.setDeclarationContext(activeDeclaration);
 

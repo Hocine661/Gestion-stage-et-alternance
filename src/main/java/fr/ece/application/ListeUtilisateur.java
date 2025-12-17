@@ -1,4 +1,5 @@
 package fr.ece.application;
+// page réservé a l'admin pour afficher la liste des étudiants inscrit
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,24 +16,23 @@ import java.sql.SQLException;
 
 public class ListeUtilisateur {
 
-    @FXML private TableView<Utilisateur> userTable;
-    @FXML private TableColumn<Utilisateur, String> nomCell;
-    @FXML private TableColumn<Utilisateur, String> prenomCell;
-    @FXML private TableColumn<Utilisateur, String> emailCell;
+    @FXML
+    private TableView<Utilisateur> userTable;
+    @FXML
+    private TableColumn<Utilisateur, String> nomCell;
+    @FXML
+    private TableColumn<Utilisateur, String> prenomCell;
+    @FXML
+    private TableColumn<Utilisateur, String> emailCell;
 
     private ObservableList<Utilisateur> userList = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
-        // Lier les colonnes
         nomCell.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenomCell.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         emailCell.setCellValueFactory(new PropertyValueFactory<>("email"));
-
-        // Test debug : vérifier si initialize est appelé
         System.out.println("Initialisation ListeUtilisateur");
-
-        // Charger les utilisateurs
         loadUsersFromDatabase();
     }
 

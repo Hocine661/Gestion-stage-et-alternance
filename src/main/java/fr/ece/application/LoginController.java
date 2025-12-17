@@ -24,6 +24,7 @@ public class LoginController {
     private final SecuriteEtService securiteService = new SecuriteEtService();
 
 
+    // on utlise mot de passe clair, car l'application prend en charge le hachage de mot de passe avec jbcrypt
     @FXML
     public void handleLogin() {
         String email = emailField.getText();
@@ -49,6 +50,7 @@ public class LoginController {
             alert.showAndWait();
         }
     }
+
     private void redirectToHome(String role) {
         String fxmlFile;
         if ("eleve".equalsIgnoreCase(role)) {

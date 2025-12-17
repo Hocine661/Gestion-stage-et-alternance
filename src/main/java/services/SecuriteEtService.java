@@ -8,7 +8,8 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class SecuriteEtService {
     private UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
-    public boolean registerUser(String nom, String prenom,String email, String motDePasseClair, String role) {
+
+    public boolean registerUser(String nom, String prenom, String email, String motDePasseClair, String role) {
 
         if (utilisateurDAO.findByEmail(email) != null) {
             return false;

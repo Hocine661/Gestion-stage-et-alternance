@@ -117,7 +117,7 @@ public class EntrepriseDAO {
 
                 entreprises.add(e);
             }
-        } catch (SQLException e)  {
+        } catch (SQLException e) {
             System.err.println("Erreur DAO Entreprise (findAll) : " + e.getMessage());
             e.printStackTrace();
         }

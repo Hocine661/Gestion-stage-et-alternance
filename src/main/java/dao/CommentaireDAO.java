@@ -36,6 +36,7 @@ public class CommentaireDAO {
 
         return commentaires;
     }
+
     public boolean addComment(int idDeclaration, int idAuteur, String contenu) {
         String sql = "INSERT INTO commentaire (contenu, date, auteur, idDeclaration) VALUES (?, NOW(), ?, ?)";
 

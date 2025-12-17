@@ -16,26 +16,28 @@ import java.io.IOException;
 
 public class HomeAdminMainController {
 
-    @FXML private Button btnDeclarations;
-    @FXML private Button btnEtudiants;
-    @FXML private Button btnEntreprises;
-    @FXML private Button btnLogout;// nouveau bouton
-    @FXML private Label adminNameLabel;
+    @FXML
+    private Button btnDeclarations;
+    @FXML
+    private Button btnEtudiants;
+    @FXML
+    private Button btnEntreprises;
+    @FXML
+    private Button btnLogout;// nouveau bouton
+    @FXML
+    private Label adminNameLabel;
 
     @FXML
     public void initialize() {
-        // Affichage du nom admin
         adminNameLabel.setText("Admin : " + CurrentUser.fullName);
     }
 
 
-
-
-
+    // voir toutes les déclaration effectuer par les eleves, c'est ici que ce fera le changemnt de statut et l'ajout de commentaire
     @FXML
-    private void openDeclarations()  {
+    private void openDeclarations() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("listeDeclaration.fxml")); // Utilisez le nom exact de votre fichier FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("listeDeclaration.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Déclaration de Stage / Alternance");
@@ -50,12 +52,13 @@ public class HomeAdminMainController {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Erreur : Impossible d'ouvrir le formulaire de déclaration (Vérifiez le nom du fichier FXML).").showAndWait();
         }
-         }
+    }
 
+    // voir la liste de tous les étudiants inscrient
     @FXML
-    private void openEtudiants()  {
+    private void openEtudiants() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("listeUtilisateur.fxml")); // Utilisez le nom exact de votre fichier FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("listeUtilisateur.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Déclaration de Stage / Alternance");
@@ -73,11 +76,12 @@ public class HomeAdminMainController {
 
     }
 
+    // fenetres flottante pour afficher toutes les entreprises créer par les éleves
     @FXML
-    private void openEntreprises()  {
+    private void openEntreprises() {
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("listeEntreprise.fxml")); // Utilisez le nom exact de votre fichier FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("listeEntreprise.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Déclaration de Stage / Alternance");
@@ -96,7 +100,9 @@ public class HomeAdminMainController {
     }
 
 
-    @FXML private void logout()         {
+    // déconnexion du compte
+    @FXML
+    private void logout() {
         Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION, "Veillez confirmer que vous souhaitez vous déconnecter !", ButtonType.YES, ButtonType.NO);
         confirmation.showAndWait();
         if (confirmation.getResult() == ButtonType.YES) {

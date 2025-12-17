@@ -1,4 +1,5 @@
 package fr.ece.application;
+// page réservé a l'admin pour gerer voir les declaration, status et ajouter ou non un commentaire
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,30 +13,35 @@ import services.ServiceDeclaration;
 
 public class ListeDeclarationController {
 
-    @FXML private TableView<DeclarationView> tableView;
+    @FXML
+    private TableView<DeclarationView> tableView;
 
-    @FXML private TableColumn<DeclarationView, String> emailCol;
-    @FXML private TableColumn<DeclarationView, String> entrepriseCol;
-    @FXML private TableColumn<DeclarationView, Object> dateDebutCol;
-    @FXML private TableColumn<DeclarationView, Object> dateFinCol;
-    @FXML private TableColumn<DeclarationView, String> typeCol;
-    @FXML private TableColumn<DeclarationView, String> statutCol;
-    @FXML private TableColumn<DeclarationView, Void> commentaireCol;
+    @FXML
+    private TableColumn<DeclarationView, String> emailCol;
+    @FXML
+    private TableColumn<DeclarationView, String> entrepriseCol;
+    @FXML
+    private TableColumn<DeclarationView, Object> dateDebutCol;
+    @FXML
+    private TableColumn<DeclarationView, Object> dateFinCol;
+    @FXML
+    private TableColumn<DeclarationView, String> typeCol;
+    @FXML
+    private TableColumn<DeclarationView, String> statutCol;
+    @FXML
+    private TableColumn<DeclarationView, Void> commentaireCol;
 
     private final ServiceDeclaration service = new ServiceDeclaration();
 
     @FXML
     public void initialize() {
 
-        // Liaison colonnes → attributs du modèle
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         entrepriseCol.setCellValueFactory(new PropertyValueFactory<>("entreprise"));
         dateDebutCol.setCellValueFactory(new PropertyValueFactory<>("dateDebut"));
         dateFinCol.setCellValueFactory(new PropertyValueFactory<>("dateFin"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         statutCol.setCellValueFactory(new PropertyValueFactory<>("statut"));
-
-        // Convertir statut en ComboBox modifiable
         statutCol.setCellFactory(col -> new TableCell<>() {
             private final ComboBox<String> comboBox = new ComboBox<>();
 
@@ -60,11 +66,7 @@ public class ListeDeclarationController {
                 }
             }
         });
-
-        // Ajouter bouton commentaire
         addCommentButton();
-
-        // Charger données
         loadData();
     }
 
@@ -109,11 +111,7 @@ public class ListeDeclarationController {
 
     @FXML
     private void closeView() {
-        // 1. Utiliser un élément FXML connu (le tableau) pour obtenir la Stage
-        // Si la fenêtre principale de l'Admin ferme l'application, ce n'est pas l'idéal.
         Stage stage = (Stage) tableView.getScene().getWindow();
-
-        // 2. Fermer la fenêtre
         stage.close();
     }
 }

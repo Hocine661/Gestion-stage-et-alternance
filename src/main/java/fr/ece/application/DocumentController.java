@@ -24,70 +24,66 @@ import model.Utilisateur;
 import model.Declaration;
 import services.DocumentService;
 import services.UserSession;
-// Assurez-vous d'avoir un ServiceDeclaration avec la méthode findActiveDeclarationByEleveId
 import services.ServiceDeclaration;
 
 
 public class DocumentController {
 
-    // ===== Dépendances Services =====
     private final DocumentService documentService = new DocumentService();
-    private final ServiceDeclaration declarationService = new ServiceDeclaration(); // Nécessaire pour obtenir l'ID de la déclaration
+    private final ServiceDeclaration declarationService = new ServiceDeclaration();
+    @FXML
+    private TableView<Document> documentTable;
+    @FXML
+    private TableColumn<Document, String> typeColumn;
+    @FXML
+    private TableColumn<Document, String> cheminColumn;
+    @FXML
+    private TableColumn<Document, LocalDate> dateColumn;
+    @FXML
+    private TableColumn<Document, String> statusColumn;
+    @FXML
+    private TableColumn<Document, Void> actionColumn;
 
-    // ===== FXML View Elements (Réutilisez les noms du FXML) =====
-    @FXML private TableView<Document> documentTable;
-    @FXML private TableColumn<Document, String> typeColumn;
-    @FXML private TableColumn<Document, String> cheminColumn; // Mappé à cheminFichier
-    @FXML private TableColumn<Document, LocalDate> dateColumn;     // Mappé à dateDepot
-    @FXML private TableColumn<Document, String> statusColumn; // Statut de vérification
-    @FXML private TableColumn<Document, Void> actionColumn;
-
-    @FXML private Button uploadButton;
-    @FXML private Label selectedFileLabel;
-    @FXML private Label declarationInfoLabel;
-    // Ajout d'un contrôle pour sélectionner le type de document
-    @FXML private ChoiceBox<String> typeChoiceBox;
+    @FXML
+    private Button uploadButton;
+    @FXML
+    private Label selectedFileLabel;
+    @FXML
+    private Label declarationInfoLabel;
+    @FXML
+    private ChoiceBox<String> typeChoiceBox;
 
     private Declaration currentDeclaration;
 
+
+    // Methodes pour gérer les document pour le role éleve, coté admin pas encore disponible, supprimé suite à de nombreau problemes notamment le télechargement
+
     @FXML
     public void initialize() {
-
-        // 1. Initialiser les choix de types de documents
         typeChoiceBox.setItems(FXCollections.observableArrayList("Convention de stage", "Attestation de fin de stage", "Autre"));
         typeChoiceBox.setValue("Convention de stage");
-
-        // 2. Initialiser les colonnes de la TableView (les noms entre guillemets sont les noms des getters dans Document.java)
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         cheminColumn.setCellValueFactory(new PropertyValueFactory<>("cheminFichier"));
-
-        // DateColumn utilise java.util.Date, qui est dans votre modèle Document.java
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("dateDepot"));
 
-        // NOTE: La colonne Statut n'est pas dans la BDD, elle doit être gérée par une CellFactory si vous voulez l'afficher
-        statusColumn.setCellValueFactory(new PropertyValueFactory<>("type")); // Utilisation temporaire du Type
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
 
-        // 3. Charger les documents liés à la déclaration active
         loadDocuments();
 
-        // 4. Configurer les boutons d'action (Télécharger/Supprimer)
         configureActionButtons();
     }
 
-    /**
-     * Charge les documents pour la déclaration active de l'utilisateur actuel.
-     */
     private void loadDocuments() {
         Utilisateur currentUser = UserSession.getCurrentUser();
         if (currentUser == null) return;
 
-        // Récupérer la déclaration active (méthode existante dans HomeEleveController)
+
         currentDeclaration = declarationService.findActiveDeclarationByEleveId(currentUser.getIdUtilisateur());
 
         if (currentDeclaration != null) {
             declarationInfoLabel.setText("Déclaration ID: " + currentDeclaration.getIdDeclaration() + " – Statut: " + currentDeclaration.getStatut());
 
-            // Appelle la méthode findByDeclaration de DocumentDAO via le Service
+
             ObservableList<Document> documents = FXCollections.observableArrayList(
                     documentService.findDocumentsByDeclarationId(currentDeclaration.getIdDeclaration())
             );
@@ -102,9 +98,6 @@ public class DocumentController {
     }
 
 
-    /**
-     * Gère le processus d'upload d'un fichier et l'insertion en BDD.
-     */
     @FXML
     private void handleUploadDocument() {
         if (currentDeclaration == null) {
@@ -118,33 +111,26 @@ public class DocumentController {
 
         if (selectedFile != null) {
             try {
-                // 1. Définir le répertoire de stockage physique (doit exister)
                 String uploadDir = "C:\\app_documents\\declaration_" + currentDeclaration.getIdDeclaration();
                 File destinationDir = new File(uploadDir);
                 if (!destinationDir.exists()) {
                     destinationDir.mkdirs();
                 }
 
-                // 2. Copier le fichier dans le répertoire de destination
                 String fileName = selectedFile.getName();
                 File destinationFile = new File(destinationDir, fileName);
                 Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-                // 3. Créer l'objet Document et l'insérer en BDD
                 Document newDocument = new Document();
                 newDocument.setIdDeclaration(currentDeclaration.getIdDeclaration());
                 newDocument.setType(typeChoiceBox.getValue());
                 newDocument.setCheminFichier(destinationFile.getAbsolutePath());
-                // NOTE: La date de dépôt (java.util.Date) est gérée par le DAO ou par Date.from(Instant.now())
-                // Pour simplifier, nous laissons le DAO gérer la date via 'NOW()'
 
                 boolean success = documentService.insertDocument(newDocument); // Nécessite l'implémentation de DocumentDAO.insert()
 
                 if (success) {
                     new Alert(Alert.AlertType.INFORMATION, "Document déposé avec succès!").showAndWait();
-                    loadDocuments(); // Rafraîchir la liste
+                    loadDocuments();
                 } else {
-                    // Supprimer le fichier copié si l'insertion BDD a échoué
                     destinationFile.delete();
                     new Alert(Alert.AlertType.ERROR, "Erreur lors de l'enregistrement en base de données. Fichier non enregistré.").showAndWait();
                 }
@@ -156,9 +142,7 @@ public class DocumentController {
         }
     }
 
-    /**
-     * Configure les boutons Télécharger/Supprimer dans la colonne d'actions.
-     */
+
     private void configureActionButtons() {
         actionColumn.setCellFactory(tc -> new TableCell<Document, Void>() {
             final Button downloadBtn = new Button("Télécharger");
@@ -183,9 +167,8 @@ public class DocumentController {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    // Masquer le bouton "Supprimer" si l'utilisateur n'est pas ADMIN
+
                     if (UserSession.getCurrentUser() == null || !"scolarité".equalsIgnoreCase(UserSession.getCurrentUser().getRole())) {
-                        // On utilise "scolarité" d'après votre fichier register.fxml
                         deleteBtn.setVisible(false);
                     } else {
                         deleteBtn.setVisible(true);
@@ -202,10 +185,7 @@ public class DocumentController {
 
         if (Desktop.isDesktopSupported() && fileToOpen.exists()) {
             try {
-                // Utilise l'application par défaut du système pour ouvrir le fichier
                 Desktop.getDesktop().open(fileToOpen);
-                // Vous pouvez commenter l'alerte de succès si vous préférez une expérience plus fluide
-                // new Alert(Alert.AlertType.INFORMATION, "Ouverture du fichier : " + filePath).showAndWait();
 
             } catch (IOException e) {
                 new Alert(Alert.AlertType.ERROR, "Erreur : Le système d'exploitation n'a pas pu ouvrir le fichier. Chemin non valide ou fichier manquant.").showAndWait();
@@ -219,7 +199,6 @@ public class DocumentController {
     }
 
     private void handleDelete(Document document) {
-        // Demande de confirmation
         Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION, "Êtes-vous sûr de vouloir supprimer ce document ?", ButtonType.YES, ButtonType.NO);
         confirmation.showAndWait();
 

@@ -18,6 +18,7 @@ public class HomeController {
     @FXML
     private Button inscriptionButtom;
 
+    // appuyer sur bouton connexion pour aller a page login
     public void onConnexionClick(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
@@ -32,16 +33,17 @@ public class HomeController {
         }
     }
 
+    // appuyer sur bouton inscription pour aller a la page register
     public void onInscriptionClick(ActionEvent event) throws IOException {
         try {
-        Parent root = FXMLLoader.load(getClass().getResource("register.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Inscription");
-        stage.show();
-    }  catch (IOException e) {
-        e.printStackTrace();
-    }
+            Parent root = FXMLLoader.load(getClass().getResource("register.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Inscription");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

@@ -6,6 +6,7 @@ import model.Entreprise;
 public class EntrepriseService {
 
     private final EntrepriseDAO entrepriseDAO = new EntrepriseDAO();
+
     public int getOrCreateEntrepriseId(Entreprise entreprise) {
 
         Entreprise existing = entrepriseDAO.findByNameAndContact(entreprise.getNom(), entreprise.getContact());
@@ -18,6 +19,7 @@ public class EntrepriseService {
 
         return generatedId;
     }
+
     public Entreprise getEntrepriseById(int idEntreprise) {
         return entrepriseDAO.findById(idEntreprise);
     }
